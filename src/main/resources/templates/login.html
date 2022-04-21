@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+</head>
+<body>
+<div th:replace="layout.html ::header"></div>
+
+<form method="post" id="loginForm" action="/user/login" class="contact__form" name="loginForm">
+    <fieldset>
+
+        <div class="container">
+            <br>
+            <br>
+            <h3>Log in</h3>
+            <div class="form-group">
+                <label for="username"  class="sr-only form-label mt-4">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
+                       autofocus="">
+            </div>
+
+            <div class="form-group">
+                <label   for="password" class=" sr-only form-label mt-4" style="font-weight: bold">Password:</label>
+                <input type="password" class="form-control" id="password" name="password"
+                       placeholder="Password" required="">
+            </div>
+            <br>
+
+            <div th:if="${hasError}">
+                <div th:text="${error}" class="text-danger"></div>
+            </div>
+
+            <div><button type="submit" id="submit" class="btn btn-primary btn-lg">Log in</button></div>
+            <a href="/register" class="btn btn-link">Register here</a>
+        </div>
+        </div>
+    </fieldset>
+</form>
+<div th:replace="layout.html ::footer"></div>
+</body>
+</html>

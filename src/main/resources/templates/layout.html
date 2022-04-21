@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css"
+          rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+
+
+
+</head>
+<body>
+<div th:fragment="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">BeautyCenter</a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home">Home
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/services">Services</a>
+                </li>
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/termini">Termini</a>-->
+<!--                </li>-->
+
+
+<!--                <li class="nav-item" >-->
+<!--                    <a class="nav-link" href="/appointment">Appointments</a>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/makeAppointment">Make Appointment</a>-->
+<!--                </li>-->
+
+                <li>
+                    <a class="nav-link"  href="/about">About Us</a>
+                </li>
+                <li>
+                    <a class="nav-link"  href="/contact">Contact Us</a>
+                </li>
+            </ul>
+                <th:block sec:authorize="!isAuthenticated()">
+                <form class="d-flex" >
+
+                <a  class="btn btn-primary my-2 my-sm-0" th:href="@{/login}">Log in</a>
+                    &nbsp;&nbsp;
+                <a  class="btn btn-outline-primary my-2 my-sm-0" href="/register">Register</a>
+
+                </form>
+                </th:block>
+
+            <th:block sec:authorize="isAuthenticated()">
+                <form class="d-flex">
+                    <a class="nav-link" href="#"  th:text="'Hello  '+${#authentication.getName()}" >
+
+                    </a>
+
+                    <a class="btn btn-secondary " href="/user/logout">
+                        Logout
+                    </a>
+
+                </form>
+            </th:block>
+
+
+        </div>
+    </div>
+</nav>
+</div>
+
+
+<div id="bodyLayout" >
+    <style type="text/css">
+        #slider {
+            overflow: hidden;
+        }
+
+        #slider figure {
+            position: relative;
+            width: 500%;
+            margin: 0;
+            left: 0;
+            animation: 20s slider infinite;
+        }
+
+        #slider figure img {
+            float: left;
+            width: 20%;
+        }
+
+        @keyframes slider {
+             0% {
+                 left: 0;
+             }
+
+             20% {
+                 left: 0;
+             }
+
+             25% {
+                 left: -100%;
+             }
+
+             45% {
+                 left: -100%;
+             }
+
+             50% {
+                 left: -200%;
+             }
+
+             70% {
+                 left: -200%
+             }
+
+             75% {
+                 left: -300%;
+             }
+
+             95% {
+                 left: -300%;
+             }
+
+             100% {
+                 left: -400%;
+             }
+         }
+    </style>
+    <div id="slider" style="width: 90%; margin:5%; background-color: beige" >
+        <figure>
+            <img width="700px" height="500px" src="https://www.e-architect.com/wp-content/uploads/2021/01/beauty-salon-by-magic-kyiv-v220121-a2.jpg" />
+            <img  width="700px" height="500px"  src="https://media.istockphoto.com/photos/various-hair-dresser-tools-on-pink-background-with-copy-space-picture-id1024577404?k=20&m=1024577404&s=612x612&w=0&h=4HSEj5psaIL1_7zA-D75DPjjyiqroJbNIwk5FV4d2_4=" />
+            <img  width="700px" height="500px" src="https://abc-7.com/wp-content/uploads/2021/06/makeup-products.jpg" />
+            <img  width="700px" height="500px" src="https://studentaffairs.lmu.edu/media/studentaffairs/brc/Spa-906x511.jpg" />
+            <img  width="700px" height="500px" src="https://www.e-architect.com/wp-content/uploads/2021/01/beauty-salon-by-magic-kyiv-v220121-a2.jpg" />
+        </figure>
+
+    </div>
+
+</div>
+
+
+
+<div th:fragment="footer">
+    <div class="footer-basic">
+        <footer style="text-align: center; bottom: 0">
+            <hr>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram">
+
+            </i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#">
+                <i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="/home">Home</a></li>
+                <li class="list-inline-item"><a href="/services">Services</a></li>
+                <li class="list-inline-item"><a href="/makeAppointment">Make Appointment</a></li>
+                <li class="list-inline-item"><a href="/rate">Rate</a></li>
+                <li class="list-inline-item"><a href="#">Locations</a></li>
+            </ul>
+            <p class="copyright">BeautyCenter © 2022</p>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Service</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+</head>
+<body>
+<div th:replace="layout.html :: header"></div>
+
+<form method="POST"  th:action="@{'/services/{id}' (id = ${service?.serviceId})}">
+    <fieldset>
+        <div class="container" width:50%>
+            <br>
+            <br>
+            <h3>Edit service</h3>
+            <div class="form-group">
+                <label  class="form-label mt-4"for="id" >Service id:</label>
+                <input id="id" name="id" type="text"
+                       th:value="${service?.serviceId}"
+                       class="form-control" disabled>
+            </div>
+
+            <div class="form-group">
+                <label  class="form-label mt-4"for="serviceName" >Service Name:</label>
+                <input id="serviceName" name="serviceName"
+                       type="text"
+                       th:value="${service?.serviceName}"
+                       class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label  class="form-label mt-4"for="price" >Price:</label>
+                <input id="price" name="price"
+                       th:value="${service?.price}"
+                       type="text" class="form-control" required>
+            </div>
+            <div class="form-group">
+            <label for="employeeIds" class="form-label mt-4">Employees:</label><br/>
+
+            <select class="form-select selectMultiple input" id="employeeIds" name="employeeIds" multiple>
+
+                <option th:each="employee: ${employees}"
+                        th:value="${employee?.getEmployeeId()}"
+                        th:selected="${service?.getEmployees().contains(employee)}"
+                        th:text="${employee.getName()}"> [employee.name]
+                </option>
+
+
+
+
+            </select>
+            </div>
+                <br>
+                <div><button type="submit" class="btn btn-primary">Submit</button></div>
+            <a id="back" href="/services" type="button" class="btn btn-link">Back to services</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<div th:replace="layout.html :: footer"></div>
+</body>
+</html>

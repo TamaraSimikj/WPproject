@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Services</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+</head>
+<body>
+<div th:replace="layout.html :: header"></div>
+<h1 class="text-center" style="padding: 2%">List of services</h1>
+
+<div style="margin-top: 5%">
+    <div>
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12" >
+                    <div class="table-responsive">
+                        <a  th:href="@{/services/add}" class="btn btn-primary">
+                            Add new service
+                        </a>
+                        <a th:href="@{/services/rate}" class="btn btn-primary">
+                            Rate Service
+                        </a>
+                        <a  th:href="@{/servicesRates}" class="btn btn-link">
+                            List of rates
+                        </a>
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>Service Name</th>
+                                <th>Price</th>
+                                <th>Rating</th>
+                                <th>Employees</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr class="item" th:each="service :${services}">
+                                <td th:text="${service.serviceName}" >[service.dejnost]</td>
+                                <td th:text="${service.price}">[service.cena]</td>
+                                <td th:text="${service.getAvgRating().toString()}" >[service.getAvgRating()]</td>
+
+                                <td>
+
+                                <div  class="item-rel"  th:each="employee:${service.employees}"
+                                      th:value="${employee.getEmployeeId()}"
+                                      th:text="${employee.getName()}"
+                                    >
+                                    [employee.ime]
+                                 </div>
+                                </td>
+
+
+                                <td>
+                                    <a th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}" class="btn btn-outline-primary">Edit</a>
+
+                                <form style="display: inline-flex" method="POST" th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">
+                                    <button type="submit" class="btn btn-outline-primary" >Delete</button>
+                                </form>
+
+                                    <a  th:href="@{'/makeAppointment'}" class="btn btn-primary">
+                                        Make Appointment</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    <div th:replace="layout.html :: footer"></div>
+
+</body>
+</html>

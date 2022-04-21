@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div th:replace="layout.html ::header"></div>
+
+<th:block sec:authorize="hasRole('ROLE_ADMIN')" >
+    <form method="post"  action="/registerEmployee" class="contact__form" name="loginForm">
+</th:block>
+
+<th:block sec:authorize="!hasRole('ROLE_ADMIN')" >
+    <form method="post" id="loginForm" action="/register" class="contact__form" name="loginForm">
+</th:block>
+    <fieldset>
+        <div class="container">
+            <br>
+            <br>
+            <h3>Register</h3>
+
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')" >
+            <div class="form-group">
+                <label for="role" class="form-label mt-4">Role:</label><br/>
+                <select class="form-select" id="role" name="role">
+                    <option th:each="role: ${roles}"
+                            th:value="${role}"  th:text="${role.name}">
+                    </option>
+                </select>
+            </div>
+            </th:block>
+            <div class="form-group">
+                <label for="username" class="form-label mt-4">Username:</label>
+                <input type="text" id="username" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <label  for="name"  class="form-label mt-4">Name:</label>
+                <input type="text" id="name" name="name" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="surname" class="form-label mt-4">Surname:</label>
+                <input type="text"  id="surname" name="surname" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label  for="phoneNumber" class="form-label mt-4">Phone number:</label>
+                <input type="text"  id="phoneNumber" name="phoneNumber" class="form-control" placeholder="07x-xxx-xxx">
+            </div>
+
+            <div class="right">
+                <div class="form-group">
+                    <label for="email" class="form-label mt-4">Email address:</label>
+                    <input type="email" id="email" name="email"
+                           class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+                    <!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+
+                <div class="form-group">
+                    <label  for="password" class="form-label mt-4" style="font-weight: bold">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+
+                <div class="form-group">
+                    <label for="repeatedPassword" class="form-label mt-4" style="font-weight: bold">Repeat Password:</label>
+                    <input type="password" id="repeatedPassword" name="repeatedPassword"
+                           class="form-control"   placeholder="Confirm Password" >
+                </div>
+                <br>
+                <span id='message'></span>
+                <hr>
+
+                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <div><button type="submit" id="submit" class="btn btn-primary btn-lg" >Register</button></div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<div th:replace="layout.html ::footer"></div>
+</body>
+
+<script>
+    $('#password, #repeatedPassword').on('keyup', function () {
+        if ($('#password').val() == $('#repeatedPassword').val() && $('#password').val().length>1 ) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
+</html>
+
