@@ -21,4 +21,6 @@ public interface UserService extends UserDetailsService {
 
     List<User> listEmployees();
 
+    User findById(String id);
+
 }

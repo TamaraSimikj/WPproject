@@ -8,7 +8,7 @@ import com.wp.project.beautysalon.repository.ServiceRepository;
 import com.wp.project.beautysalon.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import com.wp.project.beautysalon.service.SalonServiceService;
-//import com.wp.project.beautysalon.model.Client;
+
 import com.wp.project.beautysalon.model.SalonService;
 
 import java.util.List;
@@ -47,6 +47,31 @@ public class SalonSalonServiceServiceImpl implements SalonServiceService {
         return this.serviceRepository.findByServiceName(serviceName);
     }
 
+    @Override
+    public SalonService create(String id, String serviceName, Integer price, List<String> employeeIds) {
+        try {
+            SalonService postoeckaUsluga = this.findbyId(id);
+            throw new ServiceIdReservedException("This id is reserved,try with another!");
+        }
+        catch (InvalidSalonServiceIdException ex){
+            List<User> employees = this.userRepository.findAllById(employeeIds);
+            SalonService salonService = new SalonService(id,serviceName,price,employees);
+            return this.serviceRepository.save(salonService);
+        }
+    }
+
+    @Override
+    public SalonService update(String id, String serviceName, Integer price, List<String> employeeIds) {
+        SalonService salonService = this.findbyId(id);
+        salonService.setServiceName(serviceName);
+        salonService.setPrice(price);
+
+        List<User> employees = this.userRepository.findAllById(employeeIds);
+        salonService.setEmployees(employees);
+
+        return this.serviceRepository.save(salonService);
+    }
+
 //    @Override
 //    public SalonService create(String id, String serviceName, Integer price, List<Long> employeeIds) {
 //        try {
@@ -60,15 +85,15 @@ public class SalonSalonServiceServiceImpl implements SalonServiceService {
 //        }
 //    }
 
-    @Override
-    public SalonService update(String id, String serviceName, Integer price, List<Long> employeeIds) {
-        SalonService salonService = this.findbyId(id);
-        salonService.setServiceName(serviceName);
-        salonService.setPrice(price);
-    //    List<Employee> employees = this.employeeRepository.findAllById(employeeIds);
-       // salonService.setEmployees(employees);
-        return this.serviceRepository.save(salonService);
-    }
+//    @Override
+//    public SalonService update(String id, String serviceName, Integer price, List<Long> employeeIds) {
+//        SalonService salonService = this.findbyId(id);
+//        salonService.setServiceName(serviceName);
+//        salonService.setPrice(price);
+//    //    List<Employee> employees = this.employeeRepository.findAllById(employeeIds);
+//       // salonService.setEmployees(employees);
+//        return this.serviceRepository.save(salonService);
+//    }
 
     @Override
     public SalonService delete(String id) {

@@ -2,6 +2,7 @@ package com.wp.project.beautysalon.service.impl;
 
 import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.model.Role;
+import com.wp.project.beautysalon.model.exceptions.InvalidUsernameException;
 import com.wp.project.beautysalon.model.exceptions.InvalidUsernameOrPasswordException;
 import com.wp.project.beautysalon.model.exceptions.PasswordNotMatchException;
 import com.wp.project.beautysalon.model.exceptions.UsernameAlreadyExistsException;
@@ -83,5 +84,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> listEmployees() {
         return userRepository.findAll().stream().filter(x->x.getRole().equals(Role.ROLE_EMPLOYEE)).collect(Collectors.toList());
+    }
+
+    @Override
+    public User findById(String id) {
+        return this.userRepository.findById(id).orElseThrow(InvalidUsernameException::new);
     }
 }

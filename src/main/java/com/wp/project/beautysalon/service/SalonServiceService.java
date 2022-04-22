@@ -6,6 +6,7 @@ import com.wp.project.beautysalon.model.User;
 import java.util.List;
 
 public interface SalonServiceService {
+
     List<SalonService> findAll();
 
     SalonService findbyId(String id);
@@ -14,13 +15,13 @@ public interface SalonServiceService {
 
     SalonService findbyserviceName(String serviceName);
 
-   // SalonService create(String id, String serviceName, Integer price, List<Long> employeeIds);
+   SalonService create(String id, String serviceName, Integer price, List<String> employeeIds);
 
-    SalonService update(String id, String serviceName, Integer price , List<Long> employeeIds);
+    SalonService update(String id, String serviceName, Integer price , List<String> employeeIds);
 
     SalonService delete(String id);
 
-    void rate(SalonService usluga, Integer value, String comment, User client);
+    void rate(SalonService service, Integer value, String comment, User client);
 
 
 }

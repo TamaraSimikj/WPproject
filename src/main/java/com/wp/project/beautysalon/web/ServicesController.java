@@ -1,6 +1,7 @@
 package com.wp.project.beautysalon.web;
 
 import com.wp.project.beautysalon.model.SalonService;
+import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.model.exceptions.ServiceIdReservedException;
 import com.wp.project.beautysalon.service.SalonServiceService;
 import com.wp.project.beautysalon.service.UserService;
@@ -23,7 +24,6 @@ public class ServicesController {
 
     public ServicesController(SalonServiceService salonServiceService, UserService userService ) {
         this.salonServiceService = salonServiceService;
-
         this.userService = userService;
 
     }
@@ -39,9 +39,9 @@ public class ServicesController {
     @GetMapping("/services/add")
     public String showAdd(@RequestParam(required = false) String error,
                           Model model) {
-        // List<User> employees = this.userService.listEmployees();
+         List<User> employees = this.userService.listEmployees();
        // List<Employee> employees = this.employeeService.listAll();
-        // model.addAttribute("employees",employees);
+        model.addAttribute("employees",employees);
         model.addAttribute("hasError",error!=null);
         model.addAttribute("error", error);
 
@@ -51,9 +51,10 @@ public class ServicesController {
     @GetMapping("/services/{id}/edit")
     public String showEdit(@PathVariable String id, Model model) {
         SalonService service = this.salonServiceService.findbyId(id);
-      //  List<User> employees = this.userService.listEmployees();
+       List<User> employees = this.userService.listEmployees();
         //List<Employee> employees = this.employeeService.listAll();
         model.addAttribute("service",service);
+        model.addAttribute("employees",employees);
 
         return "services_form.html";
     }
@@ -62,10 +63,10 @@ public class ServicesController {
     public String create(@RequestParam String serviceId,
                          @RequestParam  String serviceName,
                          @RequestParam  Integer price,
-                         @RequestParam List<Long> employeeIds) {
+                         @RequestParam List<String> employeeIds) {
 
         try{
-           // this.salonServiceService.create(serviceId, serviceName, price, employeeIds);
+            this.salonServiceService.create(serviceId, serviceName, price, employeeIds);
             return "redirect:/services";
         }
         catch (ServiceIdReservedException exception)
@@ -79,7 +80,7 @@ public class ServicesController {
     public String update(@PathVariable String id,
                          @RequestParam String serviceName,
                          @RequestParam Integer price,
-                         @RequestParam(required = false) List<Long> employeeIds) {
+                         @RequestParam(required = false) List<String> employeeIds) {
 
         this.salonServiceService.update(id, serviceName, price, employeeIds);
 

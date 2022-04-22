@@ -43,7 +43,7 @@
                 <label for="employeeIds" class="form-label mt-4">Employees:</label><br/>
                 <select class="form-select" id="employeeIds" name="employeeIds" multiple>
                     <option th:each="employee: ${employees}"
-                            th:value="${employee?.getEmployeeId()}"
+                            th:value="${employee?.getUsername()}"
                             th:text="${employee.getName()}"> [employee.name]
                     </option>
                 </select>

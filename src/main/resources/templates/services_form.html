@@ -43,7 +43,7 @@
             <select class="form-select selectMultiple input" id="employeeIds" name="employeeIds" multiple>
 
                 <option th:each="employee: ${employees}"
-                        th:value="${employee?.getEmployeeId()}"
+                        th:value="${employee?.getUsername()}"
                         th:selected="${service?.getEmployees().contains(employee)}"
                         th:text="${employee.getName()}"> [employee.name]
                 </option>

@@ -48,7 +48,7 @@
                                 <td>
 
                                 <div  class="item-rel"  th:each="employee:${service.employees}"
-                                      th:value="${employee.getEmployeeId()}"
+                                      th:value="${employee.getUsername()}"
                                       th:text="${employee.getName()}"
                                     >
                                     [employee.ime]
