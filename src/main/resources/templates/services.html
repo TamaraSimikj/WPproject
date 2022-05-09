@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Services</title>
@@ -18,10 +18,14 @@
             <div class="row">
                 <div class="col-12" >
                     <div class="table-responsive">
-                        <a  th:href="@{/services/add}" class="btn btn-primary">
+
+                        <a  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"
+                                th:href="@{/services/add}" class="btn btn-primary">
                             Add new service
                         </a>
-                        <a th:href="@{/services/rate}" class="btn btn-primary">
+
+                        <a    sec:authorize="hasRole('ROLE_CLIENT')"
+                                th:href="@{/services/rate}" class="btn btn-primary">
                             Rate Service
                         </a>
                         <a  th:href="@{/servicesRates}" class="btn btn-link">
@@ -57,13 +61,16 @@
 
 
                                 <td>
-                                    <a th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}" class="btn btn-outline-primary">Edit</a>
+                                    <a  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"
+                                            th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}" class="btn btn-outline-primary">Edit</a>
+                                <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
+                                    <form style="display: inline-flex" method="POST" th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">
+                                        <button type="submit" class="btn btn-outline-primary" >Delete</button>
+                                    </form>
+                                </th:block>
 
-                                <form style="display: inline-flex" method="POST" th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">
-                                    <button type="submit" class="btn btn-outline-primary" >Delete</button>
-                                </form>
-
-                                    <a  th:href="@{'/makeAppointment'}" class="btn btn-primary">
+                                    <a  sec:authorize="isAuthenticated()"
+                                            th:href="@{'/makeAppointment'}" class="btn btn-primary">
                                         Make Appointment</a>
                                 </td>
                             </tr>

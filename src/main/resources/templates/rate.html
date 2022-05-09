@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Rate Service</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+</head>
+<body>
+<div th:replace="layout.html :: header"></div>
+
+<form method="POST"  th:action="@{'/services/rate'}">
+    <fieldset>
+        <div class="container" width:50%>
+            <br>
+            <br>
+            <h3>Rate service</h3>
+            <div class="form-group">
+                <label for="serviceId" class="form-label mt-4 col-sm-4">Select Service</label>
+                <select class="form-select" id="serviceId" name="serviceId">
+                    <option value="" disabled>All</option>
+                    <option th:each="service :${services}" th:value="${service.getServiceId()}"
+                            th:text="${service.getServiceName()}">[usluga.dejnost] </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label  class="form-label mt-4"for="rateValue" >Rate value:</label>
+                <input id="rateValue" name="rateValue" type="number" min="1" max="5"
+                       class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label  class="form-label mt-4"for="comment" >Comment:</label>
+                <input id="comment" name="comment"
+                       type="text"
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label  class="form-label mt-4" for="client" >Client:</label>
+                <input id="client" name="client"
+                       type="text"
+                       th:value="${loggedInUser.getUsername()}"
+                       class="form-control" readonly>
+
+            </div>
+
+            <br>
+            <div><button type="submit" class="btn btn-primary">Submit</button></div>
+            <a id="back" href="/services" type="button" class="btn btn-link">Back to services</a>
+        </div>
+        </div>
+    </fieldset>
+</form>
+<div th:replace="layout.html :: footer"></div>
+</body>
+</html>

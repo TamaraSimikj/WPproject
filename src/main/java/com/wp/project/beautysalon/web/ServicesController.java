@@ -5,6 +5,7 @@ import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.model.exceptions.ServiceIdReservedException;
 import com.wp.project.beautysalon.service.SalonServiceService;
 import com.wp.project.beautysalon.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,8 @@ public class ServicesController {
         return "services.html";
     }
 
+    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasAnyRole('ROLE_EMPLOYEE','ROLE_ADMIN')")
     @GetMapping("/services/add")
     public String showAdd(@RequestParam(required = false) String error,
                           Model model) {
@@ -48,6 +51,7 @@ public class ServicesController {
         return "createService.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_EMPLOYEE','ROLE_ADMIN')")
     @GetMapping("/services/{id}/edit")
     public String showEdit(@PathVariable String id, Model model) {
         SalonService service = this.salonServiceService.findbyId(id);
@@ -86,6 +90,7 @@ public class ServicesController {
 
         return "redirect:/services";
     }
+
     @PostMapping({"/services/{id}/delete"})
     public String delete(@PathVariable String id) {
 

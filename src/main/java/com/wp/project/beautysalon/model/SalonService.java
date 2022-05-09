@@ -32,17 +32,22 @@ public class SalonService {
         this.employees = employees;
     }
 
-    public Float getAvgRating(){
-        float sum = 0;
-        float num = 0;
+    public Double getAvgRating(){
+        double sum = 0;
+        double num = 0;
         for (Rate x : this.serviceRates){
             if(x.getRatedSalonService().getServiceId().equals(this.serviceId)){
                 sum+= x.getRateValue();
                 num++;
             }
 
-        }
-        float avg = sum/num;
-        return avg;
+        } return sum/num;
+//        for(Rate x : this.serviceRates)
+//            sum+= x.getRateValue();
+//
+//       return sum/this.serviceRates.size();
+
+//TODO: ne printa avg
+
     }
 }

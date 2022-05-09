@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of rates</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+</head>
+<body>
+<div th:replace="layout.html :: header"></div>
+<h1 class="text-center" style="padding: 2%">List of rates</h1>
+
+<div style="margin-top: 5%">
+    <div>
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+
+                        <a  sec:authorize="isAuthenticated()"
+                                class="btn btn-primary" th:href="@{/services/rate}">
+                            Rate Service
+                        </a>
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Service</th>
+                                <th>Value</th>
+                                <th>Comment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr class="item" th:each="rate :${rates}">
+                                <td th:text="${rate.getClient().getName()}">[ocena.klienti]</td>
+                                <td th:text=" ${rate.getRatedSalonService().getServiceName()}"></td>
+
+                                <td th:text="${rate.rateValue}">[ocena.vrednost]</td>
+                                <td th:text="${rate.comment}">[ocena.komentar]</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div th:replace="layout.html :: footer"></div>
+
+</body>
+</html>
