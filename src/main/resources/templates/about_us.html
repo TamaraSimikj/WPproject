@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="layout.html ::header"></div>
+
+<div class="chooseus spad set-bg" data-setbg="/assets/about-us-bg.png" style="background-image: url('/assets/about-us-bg.png');">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="chooseus__text">
+                    <div class="section-title">
+                        <br><br>
+                        <h5>WHY CHOOSE US</h5>
+                        <h2>The salon beautyCenter has been at the forefront of skin care and beauty since 2020.</h2>
+                    </div>
+                    <a href="/register" class="btn btn-primary btn-lg">Register Now</a>
+                    <th:block sec:authorize="hasRole('ROLE_CLIENT')">
+                        <a href="/appointment" class="btn btn-primary btn-lg justify-content-center">Make a reservation now</a>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="about spad">
+    <div class="container">
+        <div class="about__content">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="section-title">
+                        <h5 class="text-primary">Our Specializations</h5>
+                        <h2>Welcome to beautyCenter</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-justify">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <img src="https://cdn.mos.cms.futurecdn.net/ksUvX7Lr5cFyfhScfS6VyB.png" width="250px" height="150px" >
+                    <h4>Hair Services </h4>
+                    <p>We offer a variety of hair services such as trimming, wedding hair styles, curling, botox treatments.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 container">
+                <div class="services__item">
+                    <img src="https://media.istockphoto.com/photos/portrait-of-young-afro-woman-with-bright-makeup-picture-id1331637318?b=1&k=20&m=1331637318&s=170667a&w=0&h=0i4Viz3mAqNm9Pz1b6tnUKqpp6zHQb_OvPFsnHSOUh4=" width="250px" height="150px">
+                    <h4>Make up</h4>
+                    <p>Even if you don't want to spend a lot of money on make up, we got you covered.
+                        We have the best artists in the area with lower prices than you can imagine.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <img src="https://www.msccollege.edu/wp-content/uploads/2020/12/what-is-aromatherapy-1024x680.jpg" width="250px" height="150px">
+                    <h4>Massage</h4>
+                    <p>Who doesn't want to relax after a busy week!? We are here to make you enjoy!</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <img src="https://www.thelist.com/img/gallery/why-getting-pedicures-may-be-damaging-your-feet/how-to-stay-safe-while-getting-a-pretty-pedicure-1644019242.jpg" width="250px" height="150px">
+                    <h4>Pedicure</h4>
+                    <p>We provide pedicure with massage that will make your feet glow.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <img src="https://cdn1.treatwell.net/images/view/v2.i784919.w1472.h981.x19481829.jpg" width="250px" height="150px">
+                    <h4>Manicure</h4>
+                    <p>Every woman deserves tidy and fresh done nails. Come and get yours done by our professionals and get a
+                        free hand massage.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <img src="https://post.healthline.com/wp-content/uploads/2019/08/HL-197081-Whats_the_Difference_Between_Sugaring_and_Waxing-732x549-thumbnail.jpg" width="250px" height="150px">
+                    <h4>Waxing</h4>
+                    <p>The summer is coming closer ever day! Experience our gentle wax that will leave your hands shiny and soft.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+<br><br>
+
+<div th:replace="layout.html ::footer"></div>
+</body>
+</html>
