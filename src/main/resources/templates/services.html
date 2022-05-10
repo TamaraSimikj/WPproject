@@ -61,9 +61,9 @@
 
 
                                 <td>
-                                    <a  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"
-                                            th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}" class="btn btn-outline-primary">Edit</a>
-                                <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
+                                    <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
+                                    <a th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}"
+                                       class="btn btn-outline-primary">Edit</a>
                                     <form style="display: inline-flex" method="POST" th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">
                                         <button type="submit" class="btn btn-outline-primary" >Delete</button>
                                     </form>

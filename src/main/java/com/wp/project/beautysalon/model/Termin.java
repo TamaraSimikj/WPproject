@@ -15,8 +15,18 @@ public class Termin {
 
     private LocalDateTime startTime;
 
-    private Float duration;
+    private Integer duration;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User employee;
+
+    @OneToOne
+    private Appointment appointment;
+
+    public Termin(LocalDateTime startTime, Integer duration, User employee) {
+        this.startTime = startTime;
+        this.duration = duration;
+        this.employee = employee;
+    }
+    public Termin(){}
 }
