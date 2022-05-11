@@ -90,4 +90,9 @@ public class UserServiceImpl implements UserService {
     public User findById(String id) {
         return this.userRepository.findById(id).orElseThrow(InvalidUsernameException::new);
     }
+
+    @Override
+    public List<User> listClients() {
+        return userRepository.findAll().stream().filter(x->x.getRole().equals(Role.ROLE_CLIENT)).collect(Collectors.toList());
+    }
 }

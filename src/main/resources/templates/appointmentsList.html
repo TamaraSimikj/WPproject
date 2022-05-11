@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available appointments</title>
+
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="layout.html ::header"></div>
+
+<div style="margin-top: 5%">
+    <div>
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12" >
+                    <a  th:href="@{/services/rate}" class="btn btn-primary">
+                        Rate Service
+                    </a>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>No. of reservation</th>
+                                <th>Client</th>
+                                <th>Time</th>
+                                <th>Payment</th>
+                                <th>Service</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr class="item" th:each="app :${appointmentList}">
+                                <td th:text="${app.id}">[app.id]</td>
+                                <td th:text="${app.user.getName()} + ' id:' +${app.user.getUsername()} " >[app.user.id]</td>
+                                <td th:text="${app.termins.format()}" >[app.termins.pocetok]</td>
+                                <td th:text="${app.payment}!=null ? ${app.payment.getId()} :'notPayed'">[app.payment.getId()]</td>
+                                <!--     <td  th:each="usluga : ${uslugi}"
+                                          th:if="${rezU.getUsluga()} == ${usluga} and ${rezU.getBrRez()} == ${rez}"
+                                          th:text="${usluga.getDejnost()}">not specified</td>-->
+                                <th:block  th:each="rezU : ${rezUslugi}" th:if="${rezU.brRez} == ${rez}">
+                                    <td th:text="${rezU.usluga.getDejnost()}" >[rez]</td>
+                                </th:block>
+                                <td>
+
+                                    <form method="POST" th:action="@{'/appointment/{id}/delete' (id = ${app.id})}">
+                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                    </form>
+
+                                    <a th:href="@{'/appointment/{id}/edit' (id = ${app.id})}" class="btn btn-primary">Edit</a>
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div th:replace="layout.html ::footer"></div>
+</body>
+</html>

@@ -5,12 +5,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = {"/","/home"})
 public class HomeController {
 
-    @GetMapping
+    @GetMapping({"/home", "/"})
     public String homePage(){
 
         return "layout.html";
     }
+
+
+    @GetMapping({"/about"})
+    public String about_us(){
+
+        return "about_us.html";
+    }
+
+    @GetMapping({"/appointment"})
+    public String make_appointment(){
+
+        return "appointment.html";
+    }
+
+
 }

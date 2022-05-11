@@ -23,7 +23,11 @@
                         <h5>WHY CHOOSE US</h5>
                         <h2>The salon beautyCenter has been at the forefront of skin care and beauty since 2020.</h2>
                     </div>
-                    <a href="/register" class="btn btn-primary btn-lg">Register Now</a>
+
+                    <th:block sec:authorize="!isAuthenticated()">
+                        <a href="/register"  class="btn btn-primary btn-lg">Register Now</a>
+                    </th:block>
+
                     <th:block sec:authorize="hasRole('ROLE_CLIENT')">
                         <a href="/appointment" class="btn btn-primary btn-lg justify-content-center">Make a reservation now</a>
                     </th:block>

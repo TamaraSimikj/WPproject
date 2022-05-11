@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make an appointment</title>
+
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="layout.html ::header"></div>
+
+<form method="POST" th:action="@{'/appointment'}" class="justify-content-center container">
+    <div class="form-group">
+        <label for="selectUsluga" class="form-label mt-4 col-sm-4">Select Service</label>
+        <select class="form-select" id="selectUsluga">
+            <option value="" disabled>All</option>
+            <option th:each="usluga :${uslugi}" th:value="${usluga.getId()}"  th:text="${usluga.getDejnost()}">[usluga.dejnost] </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="datum" class="form-label mt-4" >Select date:</label>
+        <input type="date" id="datum" name="datum" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="selectTermin" class="form-label mt-4">Select Time</label>
+        <select class="form-select" id="selectTermin">
+            <option th:each="termin :${termini}" th:value="${termin.getId()}"
+                    th:text="${termin.format()}">[termin.pocetok] </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label  class="form-label mt-4">Payment method</label>
+        <!--    <select class="form-select" id="nacinPlakjanje">-->
+        <!--        <option> In the salon</option>-->
+        <!--        <option id="CC"> Credit card</option>-->
+        <!--    </select>-->
+        <br>
+        <div>
+            <input type="checkbox">
+            <label> In the salon</label><br>
+            <input type="checkbox">
+            <a th:href="@{/payment}">Credit card</a><br>
+        </div>
+        <br>
+        <hr>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </div>
+</form>
+
+<div th:replace="layout.html ::footer"></div>
+</body>
+</html>
