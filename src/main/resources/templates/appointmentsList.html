@@ -18,40 +18,35 @@
         <div class="container mb-4">
             <div class="row">
                 <div class="col-12" >
-                    <a  th:href="@{/services/rate}" class="btn btn-primary">
-                        Rate Service
-                    </a>
                     <div class="table-responsive">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
                                 <th>No. of reservation</th>
                                 <th>Client</th>
-                                <th>Time</th>
+                                <th>Time</th> <!-- dali da se stavi i id na termin-->
                                 <th>Payment</th>
                                 <th>Service</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <tr class="item" th:each="app :${appointmentList}">
-                                <td th:text="${app.id}">[app.id]</td>
-                                <td th:text="${app.user.getName()} + ' id:' +${app.user.getUsername()} " >[app.user.id]</td>
-                                <td th:text="${app.termins.format()}" >[app.termins.pocetok]</td>
-                                <td th:text="${app.payment}!=null ? ${app.payment.getId()} :'notPayed'">[app.payment.getId()]</td>
-                                <!--     <td  th:each="usluga : ${uslugi}"
-                                          th:if="${rezU.getUsluga()} == ${usluga} and ${rezU.getBrRez()} == ${rez}"
-                                          th:text="${usluga.getDejnost()}">not specified</td>-->
-                                <th:block  th:each="rezU : ${rezUslugi}" th:if="${rezU.brRez} == ${rez}">
-                                    <td th:text="${rezU.usluga.getDejnost()}" >[rez]</td>
+                            <tr class="item" th:each="app :${appointments}">
+                                <td th:text="${app.appointmentId}">[app.id]</td>
+                                <td th:text="${app.client.getName()} + ' id:' +${app.client.getUsername()} " >[app.user.id]</td>
+                                <td th:text="${app.termin.getStartTime()}" >[app.termins.pocetok]</td>
+                                <td th:text="${app.payment}!=null ? ${app.payment.getPaymentId()} :'notPayed'">[app.payment.getId()]</td>
+
+                                <th:block  th:each="service : ${app.salonServices}" >
+                                    <td th:text="${service.getServiceName()}" ></td>
                                 </th:block>
                                 <td>
 
-                                    <form method="POST" th:action="@{'/appointment/{id}/delete' (id = ${app.id})}">
+                                    <form method="POST" th:action="@{'/appointment/{id}/delete' (id = ${app.appointmentId})}">
                                         <button type="submit" class="btn btn-primary">Delete</button>
                                     </form>
 
-                                    <a th:href="@{'/appointment/{id}/edit' (id = ${app.id})}" class="btn btn-primary">Edit</a>
+                                    <a th:href="@{'/appointment/{id}/edit' (id = ${app.appointmentId})}" class="btn btn-primary">Edit</a>
 
                                 </td>
                             </tr>

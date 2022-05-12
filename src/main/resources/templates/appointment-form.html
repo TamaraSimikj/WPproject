@@ -13,31 +13,25 @@
 <body>
 <div th:replace="layout.html ::header"></div>
 
-<form method="POST" th:action="@{'/appointment'}" class="justify-content-center container">
+<form method="POST" th:action="@{'/makeAppointment'}" class="justify-content-center container">
     <div class="form-group">
-        <label for="selectUsluga" class="form-label mt-4 col-sm-4">Select Service</label>
-        <select class="form-select" id="selectUsluga">
+        <label for="serviceIds" class="form-label mt-4 col-sm-4">Select Service</label>
+        <select class="form-select" id="serviceIds" name="serviceIds" multiple>
             <option value="" disabled>All</option>
-            <option th:each="usluga :${uslugi}" th:value="${usluga.getId()}"  th:text="${usluga.getDejnost()}">[usluga.dejnost] </option>
+            <option th:each="service :${services}" th:value="${service.getServiceId()}"
+                    th:text="${service.getServiceName()}">[usluga.dejnost] </option>
         </select>
     </div>
+
     <div class="form-group">
-        <label for="datum" class="form-label mt-4" >Select date:</label>
-        <input type="date" id="datum" name="datum" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="selectTermin" class="form-label mt-4">Select Time</label>
-        <select class="form-select" id="selectTermin">
-            <option th:each="termin :${termini}" th:value="${termin.getId()}"
-                    th:text="${termin.format()}">[termin.pocetok] </option>
+        <label for="terminId" class="form-label mt-4">Select Time</label>
+        <select class="form-select" id="terminId" name="terminId" >
+            <option th:each="termin :${termini}" th:value="${termin.getTerminId()}"
+                    th:text="${termin.getStartTime()}">[termin.pocetok] </option>
         </select>
     </div>
     <div class="form-group">
         <label  class="form-label mt-4">Payment method</label>
-        <!--    <select class="form-select" id="nacinPlakjanje">-->
-        <!--        <option> In the salon</option>-->
-        <!--        <option id="CC"> Credit card</option>-->
-        <!--    </select>-->
         <br>
         <div>
             <input type="checkbox">
@@ -45,10 +39,19 @@
             <input type="checkbox">
             <a th:href="@{/payment}">Credit card</a><br>
         </div>
+    </div>
+    <div class="form-group" >
+        <label  class="form-label mt-4" for="clientName" >Client:</label>
+        <input  id="clientName" name="clientName"
+                type="text"
+                th:value="${#authentication.getName()}"
+                class="form-control" readonly>
         <br>
         <hr>
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </div>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+
+
 </form>
 
 <div th:replace="layout.html ::footer"></div>

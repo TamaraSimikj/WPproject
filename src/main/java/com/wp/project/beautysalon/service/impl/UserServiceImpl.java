@@ -92,6 +92,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByName(String name) {
+        return this.userRepository.findByName(name);
+    }
+
+    @Override
     public List<User> listClients() {
         return userRepository.findAll().stream().filter(x->x.getRole().equals(Role.ROLE_CLIENT)).collect(Collectors.toList());
     }

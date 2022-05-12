@@ -12,12 +12,11 @@
 <div th:replace="layout.html ::header"></div>
 
 <form method="post" id="loginForm" action="/login" class="contact__form" name="loginForm">
-    <fieldset>
+    <fieldset  style="margin: 5%; ">
 
-        <div class="container">
-            <br>
-            <br>
-            <h3>Log in</h3>
+        <div class="container justify-content-center bg-light bg-gradient rounded" style="width: 50%; margin:auto;
+        padding: 5%; box-shadow: 5px 10px 8px #888888">
+            <h3 class="text-center">Log in</h3>
             <div class="form-group">
                 <label for="username"  class="sr-only form-label mt-4">Username:</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
@@ -35,8 +34,11 @@
                 <div th:text="${error}" class="text-danger"></div>
             </div>
 
-            <div><button type="submit" id="submit" class="btn btn-primary btn-lg">Log in</button></div>
-            <a href="/register" class="btn btn-link">Register here</a>
+            <div class="text-center">
+                <button type="submit" id="submit" class="btn btn-primary btn-lg">Log in</button>
+                <a href="/register" class="btn btn-link" style="display: block">Register here</a>
+            </div>
+
         </div>
         </div>
     </fieldset>

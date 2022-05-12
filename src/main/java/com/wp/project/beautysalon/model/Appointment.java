@@ -10,7 +10,7 @@ import java.util.List;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long appointmentId;
+    private Integer appointmentId;
 
     private Integer totalPrice;
 
@@ -29,4 +29,10 @@ public class Appointment {
 
 
     public Appointment(){}
+
+    public Appointment(User client, Termin termin, List<SalonService> salonServices) {
+        this.termin = termin;
+        this.client = client;
+        this.salonServices = salonServices;
+    }
 }

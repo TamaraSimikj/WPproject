@@ -23,6 +23,8 @@ public interface UserService extends UserDetailsService {
 
     User findById(String id);
 
+    User findByName(String name);
+
     List<User> listClients();
 
 }

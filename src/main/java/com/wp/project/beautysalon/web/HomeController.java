@@ -20,11 +20,7 @@ public class HomeController {
         return "about_us.html";
     }
 
-    @GetMapping({"/appointment"})
-    public String make_appointment(){
 
-        return "appointment.html";
-    }
 
 
 }

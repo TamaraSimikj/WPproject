@@ -34,28 +34,26 @@
                     <th:block sec:authorize="hasRole('ROLE_EMPLOYEE')">
                         <a class="nav-link" href="/appointmentList">All appointments</a>
                     </th:block>
-                    <!--                <li class="nav-item">-->
-                    <!--                    <a class="nav-link" href="/appointmentList">Available appointments</a>-->
-                    <!--                </li>-->
+
                     <th:block sec:authorize="hasRole('ROLE_CLIENT')">
                         <a class="nav-link" href="/makeAppointment">Make an appointment</a>
                     </th:block>
 
-                    <!--                <li class="nav-item">-->
-                    <!--                    <a class="nav-link" href="/makeAppointment">Make an appointment</a>-->
-                    <!--                </li>-->
-
-                    <li>
-                        <a class="nav-link"  href="/about">About Us</a>
-                    </li>
 
                     <th:block sec:authorize="hasRole('ROLE_EMPLOYEE')">
                         <a href="/appointment" class="btn btn-primary btn-lg justify-content-center">Appointments</a>
                     </th:block>
 
                     <th:block sec:authorize="isAuthenticated()">
-                        <a class="nav-link"  href="/appointmentsList">Booked Appointments</a>
+                        <a class="nav-link"  href="/appointments">Booked Appointments</a>
+                        <a class="nav-link " href="/termini">Free Termini
+
+                        </a>
                     </th:block>
+
+                    <li>
+                        <a class="nav-link"  href="/about">About Us</a>
+                    </li>
 
                 </ul>
                 <th:block sec:authorize="!isAuthenticated()">
@@ -147,7 +145,7 @@
     </style>
     <div class="d-grid gap-2">
         <th:block sec:authorize="hasRole('ROLE_CLIENT')">
-            <a class="btn btn-lg btn-primary" href="/appointment">Make an appointment</a>
+            <a class="btn btn-lg btn-primary" href="/MakeAppointment">Make an appointment</a>
         </th:block>
 
     </div>
@@ -165,25 +163,15 @@
 
 </div>
 
-<div class="card mb-9" style="max-width: 300rem;">
-    <div class="card-header" style="font-weight: bold">Contact us</div>
+<div class="card text-white mb-9" style="max-width: 300rem; background-color: darkslategrey">
+    <div class="card-header text-center"><h4>Contact us</h4></div>
     <div class="d-flex justify-content-center">
         <div class="col-lg-3 text-center">
-            <h4 class="card-title">Address: </h4>
-            <p class="card-text">Gjaurska Ulica 69/420</p>
+            <h3 class="card-title">Address: </h3>
+            <p class="card-text">Ulica Makedonija 69/420</p>
         </div>
         <div class="col-lg-3 text-center">
-            <h4 class="card-title">Phone: </h4>
-            <p class="card-text">+389 78/321-784</p>
-            <p class="card-text">+389 71/321-700</p>
-        </div>
-        <div class="col-lg-3 text-center">
-            <h4 class="card-title">Email: </h4>
-            <p class="card-text">beautycenter01@gmail.com</p>
-        </div>
-
-        <div class="col-lg-3 text-center">
-            <h4 class="card-title">Working Hours</h4>
+            <h3 class="card-title">Working Hours</h3>
             <ul style="list-style: none">
                 <li>Monday - Friday</li>
                 <li>8 am - 9 pm</li>
@@ -191,11 +179,25 @@
                 <li>8 am - 4 pm</li>
             </ul>
         </div>
+        <div class="col-lg-3 text-center">
+            <h3 class="card-title">Phone: </h3>
+            <p class="card-text">+389 78/321-784</p>
+            <p class="card-text">+389 71/321-700</p>
+
+        </div>
+        <div class="col-lg-3 text-center">
+            <h3 class="card-title">Email: </h3>
+            <p class="card-text">beautycenter01@gmail.com</p>
+        </div>
+
+
+    </div>
+    <div class="map" style="margin-left: 5%;" >
+        <iframe style="width: 95%; height: 400px;" class="justify-content-center"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1048.3541231470856!2d21.43168421844593!3d41.99612823689114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135415b475092443%3A0x2420e649a4b27994!2zU3F1YXJlIOKAnk1hY2Vkb25pYeKAnQ!5e0!3m2!1sen!2smk!4v1613774637828!5m2!1sen!2smk"></iframe>
     </div>
 </div>
-<div class="map">
-    <iframe style="width: 1890px; height: 400px" class="justify-content-center" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1048.3541231470856!2d21.43168421844593!3d41.99612823689114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135415b475092443%3A0x2420e649a4b27994!2zU3F1YXJlIOKAnk1hY2Vkb25pYeKAnQ!5e0!3m2!1sen!2smk!4v1613774637828!5m2!1sen!2smk"></iframe>
-</div>
+
 
 
 <div th:fragment="footer">
@@ -210,7 +212,7 @@
                 <li class="list-inline-item"><a href="/home">Home</a></li>
                 <li class="list-inline-item"><a href="/services">Services</a></li>
                 <li class="list-inline-item"><a href="/makeAppointment">Make Appointment</a></li>
-                <li class="list-inline-item"><a href="/rate">Rate</a></li>
+                <li class="list-inline-item"><a href="services/rate">Rate</a></li>
                 <li class="list-inline-item"><a href="#">Locations</a></li>
             </ul>
             <p class="copyright">BeautyCenter © 2022</p>

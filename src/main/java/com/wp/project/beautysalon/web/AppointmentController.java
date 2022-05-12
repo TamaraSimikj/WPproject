@@ -11,6 +11,8 @@ import com.wp.project.beautysalon.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -32,48 +34,41 @@ public class AppointmentController {
     }
 
 
-    @GetMapping("/appointmentsList")
+    @GetMapping("/appointments")
     public String showListAppointments(Model model) {
-//        List<Termini> termini = this.terminiService.findAll();
-//        List<Rezervacija> rezervacii= this.rezervacijaService.listAll();
-//        List<Uslugi> uslugi = this.uslugiService.findAll();
-//        List<RezervacijaUslugi> rezUslugi = this.rezervacijaUslugiService.listAll();
-//
-//        model.addAttribute("termini", termini);
-//        model.addAttribute("rezervacii",rezervacii);
-//        model.addAttribute("uslugi",uslugi);
-//        model.addAttribute("rezUslugi", rezUslugi);
 
-       // ------
-
-        List<Termin> termins = this.terminiService.findAll();
         List<Appointment> appointmentList = this.appointmentService.listAll();
-        List<SalonService> salonServiceList = this.salonService.findAll();
 
-
-        model.addAttribute("termins", termins);
         model.addAttribute("appointments", appointmentList);
-        model.addAttribute("services", salonServiceList);
-
 
         return "appointmentsList.html";
     }
 
     @GetMapping( "/makeAppointment")
     public String MakeAppointment(Model model) {
-//        List<Uslugi> uslugi = this.uslugiService.findAll();
-//        List<Termini> termini = this.terminiService.findAll();
-//        List<Klienti> klienti = this.klientiService.listAll();
-        List<Appointment> appointmentList = this.appointmentService.listAll();
-        List<Termin> termins = this.terminiService.findAll();
-        List<User> clients = this.userService.listClients();
 
-        model.addAttribute("appointmentList", appointmentList);
-        model.addAttribute("termins", termins);
-        model.addAttribute("clients", clients);
+        List<Termin> termini = this.terminiService.listAllNotReserved();
+        List<SalonService> services = this.salonService.findAll();
 
-        return "appointment.html";
+
+        model.addAttribute("termini", termini);
+        model.addAttribute("services", services);
+
+        return "appointment-form.html";
+    }
+    @PostMapping("/makeAppointment")
+    public String create(@RequestParam List<String> serviceIds,
+                         @RequestParam String clientName,
+                         @RequestParam  Integer terminId
+                         // @RequestParam(required = false) Integer uplataId
+    ) {
+        List<SalonService> services = this.salonService.findAllById(serviceIds);
+   //     User client = this.userService.findById(clientName);
+
+       Appointment appointment = this.appointmentService.create(clientName,terminId,services);
+
+        return "redirect:/appointments";
     }
 
-
+// da se dodadat delete i edit , i da se printaat uslugite vo edna kolona
 }
