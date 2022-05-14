@@ -27,4 +27,6 @@ public interface UserService extends UserDetailsService {
 
     List<User> listClients();
 
+    List<User> listAll();
+
 }

@@ -8,6 +8,7 @@ import com.wp.project.beautysalon.model.exceptions.PasswordNotMatchException;
 import com.wp.project.beautysalon.model.exceptions.UsernameAlreadyExistsException;
 import com.wp.project.beautysalon.repository.UserRepository;
 import com.wp.project.beautysalon.service.UserService;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -99,5 +100,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> listClients() {
         return userRepository.findAll().stream().filter(x->x.getRole().equals(Role.ROLE_CLIENT)).collect(Collectors.toList());
+    }
+
+    //za PDF
+    @Override
+    public List<User> listAll() {
+        return userRepository.findAll(Sort.by("email").ascending());
     }
 }

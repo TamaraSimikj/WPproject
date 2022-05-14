@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TODO: If you are implementing the security requirements, remove this following line
-       // web.ignoring().antMatchers("/**");
+      //  web.ignoring().antMatchers("/**");
     }
 //
 //    @Override

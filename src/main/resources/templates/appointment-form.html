@@ -9,6 +9,38 @@
     <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/bootbox.min.js"></script>
+
+
+<!--    <script>-->
+<!--        function confirmAlert(btnConfirm){-->
+<!--            console.log("vleze");-->
+<!--             alert({-->
+<!--                size: 'large',-->
+<!--                title: 'Reservation complete!',-->
+<!--                message: "Your reservation is completed! Click on the PDF button to see your receipt!",-->
+<!--                centerVertical: true,-->
+<!--                buttons: {-->
+<!--                    confirm: {-->
+<!--                        label: '<i class="fa fa-check"></i> Ok',-->
+<!--                        callback: function(){-->
+<!--                            var $form = $(btnConfirm).parent('form');-->
+<!--                            $form.trigger('submit');-->
+<!--                        }-->
+<!--                    },-->
+<!--                    print: {-->
+<!--                        label: '<i class="fa fa-file-pdf-o"></i> PDF',-->
+<!--                        callback: function(){-->
+<!--                            var input = $(btnConfirm).next('input');-->
+<!--                            input.attr('value', 'true');-->
+<!--                            var $form = $(btnConfirm).parent('form');-->
+<!--                            $form.trigger('submit');-->
+<!--                        }-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
 </head>
 <body>
 <div th:replace="layout.html ::header"></div>
@@ -49,11 +81,28 @@
         <br>
         <hr>
     </div>
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+
+    <div class="col-md-12">
+        <p>By clicking the Confirm button, you confirm that you have read and understood,
+            and accept our <u>Terms and Conditions</u>, <u>Return Policy</u> and <u>Privacy Policy</u>.
+        </p>
+
+            <button type="submit" class="btn btn-primary btn-lg">Confirm</button>
+            <a th:href="@{/users/export/pdf}">Export to PDF</a>
+
+        <!--            <button  href="/pdf" class="btn btn-primary btn-lg">Generate PDF</button>-->
+<!--            <input type="hidden" name="pdfRedir" id="pdfRedir" onclick="confirmAlert(this)" value="false">-->
+
+    </div>
+
+
+<!--        <button type="submit" class="btn btn-primary btn-lg">Submit</button>-->
 
 
 </form>
 
 <div th:replace="layout.html ::footer"></div>
 </body>
+
 </html>
+

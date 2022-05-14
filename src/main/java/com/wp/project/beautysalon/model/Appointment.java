@@ -35,4 +35,8 @@ public class Appointment {
         this.client = client;
         this.salonServices = salonServices;
     }
+
+    public Termin getTermin() {
+        return termin;
+    }
 }
