@@ -8,15 +8,15 @@ import java.util.List;
 @Data
 @Entity
 public class SalonService {
+
     @Id
-    //@GeneratedValue
     private String serviceId;
 
-    private String serviceName; //dejnost
+    private String serviceName;
 
     private Integer price;
 
-   @OneToMany
+   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Rate> serviceRates = new ArrayList<>();
 
    @ManyToMany
