@@ -5,13 +5,13 @@
     <title>Add new Service</title>
     <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
     <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
-    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
 </head>
 <body>
 <div th:replace="layout.html :: header"></div>
 
-<form method="POST"  th:action="@{'/services'}">
+<form method="POST" th:action="@{'/services'}">
     <fieldset>
         <div class="container" width:50%>
             <br>
@@ -19,43 +19,45 @@
             <h3>Create new service</h3>
 
             <div class="form-group">
-                <label  class="form-label mt-4"for="serviceId" >Service id:</label>
-                <input id="serviceId" name="serviceId" type="text"
-                       class="form-control" required>
+                <label class="form-label mt-4" for="serviceId">Service id:</label>
+                <input class="form-control" id="serviceId" name="serviceId"
+                       required type="text">
             </div>
 
             <div class="form-group">
-                <label  class="form-label mt-4"for="serviceName" >Service name:</label>
-                <input id="serviceName" name="serviceName"
-                       th:value="${serviceName}"
-                       type="text"
-                       class="form-control" required>
+                <label class="form-label mt-4" for="serviceName">Service name:</label>
+                <input class="form-control" id="serviceName"
+                       name="serviceName"
+                       required
+                       th:value="${serviceName}" type="text">
             </div>
             <div class="form-group">
-                <label  class="form-label mt-4"for="price" >Price:</label>
-                <input id="price" name="price"
-                       th:value="${price}"
-                       type="text" class="form-control" required>
+                <label class="form-label mt-4" for="price">Price:</label>
+                <input class="form-control" id="price"
+                       name="price"
+                       required th:value="${price}" type="text">
 
             </div>
 
             <div class="form-group">
-                <label for="employeeIds" class="form-label mt-4">Employees:</label><br/>
-                <select class="form-select" id="employeeIds" name="employeeIds" multiple>
+                <label class="form-label mt-4" for="employeeIds">Employees:</label><br/>
+                <select class="form-select" id="employeeIds" multiple name="employeeIds">
                     <option th:each="employee: ${employees}"
-                            th:value="${employee?.getUsername()}"
-                            th:text="${employee.getName()}"> [employee.name]
+                            th:text="${employee.getName()}"
+                            th:value="${employee?.getUsername()}"> [employee.name]
                     </option>
                 </select>
             </div>
             <br>
             <div th:if="${hasError}">
-                <div th:text="${error}" class="text-danger"></div>
+                <div class="text-danger" th:text="${error}"></div>
             </div>
 
 
-            <div><button type="submit" class="btn btn-primary">Submit</button></div>
-            <a id="back" href="/services" type="button" class="btn btn-link">Back to services</a>
+            <div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+            <a class="btn btn-link" href="/services" id="back" type="button">Back to services</a>
         </div>
         </div>
     </fieldset>

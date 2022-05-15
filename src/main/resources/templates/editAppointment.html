@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit appointment</title>
+    <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
+    <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+</head>
+<body>
+<div th:replace="layout.html::header"></div>
+
+<div style="width: 50%; padding: 5%">
+    <form method="POST" th:action="@{'/appointments/{id}' (id = ${appointment.appointmentId})}">
+        <div class="form-group">
+            <label class="form-label mt-4" for="id">Appointment id:</label>
+            <input class="form-control" disabled id="id"
+                   name="id"
+                   th:value="${appointment.appointmentId}" type="text">
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4 col-sm-4" for="serviceIds">Select Service</label>
+            <select class="form-select selectMultiple input " id="serviceIds" multiple name="serviceIds">
+                <option disabled value="">All</option>
+                <option th:each="service :${services}" th:selected="${appointment.salonServices.contains(service)}"
+                        th:text="${service.getServiceName()}"
+                        th:value="${service.getServiceId()}"
+                >[usluga.dejnost]
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4" for="terminId">Select Time</label>
+            <select class="form-select" id="terminId" name="terminId">
+                <option th:selected="true"
+                        th:text="${appointment.termin.getStartTime()}"
+                        th:value="${appointment.termin.getTerminId()}"
+                ></option>
+                <option disabled>Other free dates</option>
+
+                <option th:each="termin :${termini}" th:text="${termin.getStartTime()}"
+                        th:value="${termin.getTerminId()}"
+                ></option>
+            </select>
+
+            <div class="form-group">
+                <label class="form-label mt-4" for="payment">Payment method</label>
+                <select class="form-select" id="payment">
+                    <option> In the salon</option>
+                    <option> Credit card</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4" for="clientName">Client:</label>
+            <input class="form-control" id="clientName"
+                   name="clientName"
+                   readonly
+                   th:value="${#authentication.getName()}" type="text">
+            <br>
+            <hr>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <a class="btn btn-link" href="/appointments" id="back" type="button">Back to list of appointments</a>
+
+    </form>
+</div>
+
+</body>
+</html>

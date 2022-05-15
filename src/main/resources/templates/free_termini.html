@@ -5,7 +5,7 @@
     <title>TerminiList</title>
     <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
     <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
-    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
 </head>
 <body>
@@ -15,10 +15,10 @@
     <div>
         <div class="container mb-4">
             <div class="row">
-                <div class="col-12" >
+                <div class="col-12">
                     <h2 class="text-center">Free booking terms</h2>
-                    <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"
-                       th:href="@{/termini/add}" class="btn btn-primary">
+                    <a class="btn btn-primary"
+                       sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')" th:href="@{/termini/add}">
                         Add new
                     </a>
                     <div class="table-responsive">
@@ -32,22 +32,24 @@
                             </thead>
                             <tbody>
 
-                            <tr class="item" th:each="termin :${termini}" >
-                                <td th:text="${termin.startTime}" >[termin.pocetok]</td>
+                            <tr class="item" th:each="termin :${termini}">
+                                <td th:text="${termin.startTime}">[termin.pocetok]</td>
                                 <td th:text="${termin.duration}">[termin.vremetraenje]</td>
-                                <td th:text="${termin.employee.getName()}" >[termin.vraboteni.getFirstName()]</td>
+                                <td th:text="${termin.employee.getName()}">[termin.vraboteni.getFirstName()]</td>
 
                                 <td>
-                                    <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
-                                    <a th:href="@{'/termini/{id}/edit' (id = ${termin.terminId})}" class="btn btn-link">Edit</a>
+                                    <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
+                                        <a class="btn btn-link"
+                                           th:href="@{'/termini/{id}/edit' (id = ${termin.terminId})}">Edit</a>
 
-                                    <form method="POST" th:action="@{'/termini/{id}/delete' (id = ${termin.terminId})}">
-                                        <button type="submit" class="btn btn-primary">Delete</button>
-                                    </form>
+                                        <form method="POST"
+                                              th:action="@{'/termini/{id}/delete' (id = ${termin.terminId})}">
+                                            <button class="btn btn-primary" type="submit">Delete</button>
+                                        </form>
                                     </th:block>
 
-                                    <a  sec:authorize="isAuthenticated()"
-                                        th:href="@{'/makeAppointment'}" class="btn btn-primary">
+                                    <a class="btn btn-primary"
+                                       sec:authorize="isAuthenticated()" th:href="@{'/makeAppointment'}">
                                         Make Appointment</a>
                                 </td>
 

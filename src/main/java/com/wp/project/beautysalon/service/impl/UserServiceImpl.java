@@ -1,7 +1,7 @@
 package com.wp.project.beautysalon.service.impl;
 
-import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.model.Role;
+import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.model.exceptions.InvalidUsernameException;
 import com.wp.project.beautysalon.model.exceptions.InvalidUsernameOrPasswordException;
 import com.wp.project.beautysalon.model.exceptions.PasswordNotMatchException;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 
 @Service
@@ -41,13 +40,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(String username, String password, String repeatPassword, String firstName, String lastName,
                          Role role, String email, String phoneNumber) {
-        if(username == null || username.isEmpty() || password==null || password.isEmpty()){
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
             throw new InvalidUsernameOrPasswordException();
         }
-        if(!password.equals(repeatPassword))
+        if (!password.equals(repeatPassword))
             throw new PasswordNotMatchException();
 
-        if(this.userRepository.findById(username).isPresent())
+        if (this.userRepository.findById(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
 
         User user = new User(username, passwordEncoder.encode(password), firstName, lastName, role, email, phoneNumber);
@@ -68,8 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User changePassword(String username, String password, String repeatPassword) {
-        if(password!=repeatPassword)
-        {
+        if (password != repeatPassword) {
             throw new PasswordNotMatchException();
         }
         User user = (User) loadUserByUsername(username);
@@ -79,12 +77,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<String> findAllUsernames() {
-        return userRepository.findAll().stream().map(x->x.getUsername()).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(x -> x.getUsername()).collect(Collectors.toList());
     }
 
     @Override
     public List<User> listEmployees() {
-        return userRepository.findAll().stream().filter(x->x.getRole().equals(Role.ROLE_EMPLOYEE)).collect(Collectors.toList());
+        return userRepository.findAll().stream().filter(x -> x.getRole().equals(Role.ROLE_EMPLOYEE)).collect(Collectors.toList());
     }
 
     @Override
@@ -99,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> listClients() {
-        return userRepository.findAll().stream().filter(x->x.getRole().equals(Role.ROLE_CLIENT)).collect(Collectors.toList());
+        return userRepository.findAll().stream().filter(x -> x.getRole().equals(Role.ROLE_CLIENT)).collect(Collectors.toList());
     }
 
     //za PDF

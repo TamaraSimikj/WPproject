@@ -5,99 +5,28 @@
     <title>Services</title>
     <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
     <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
-    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
 </head>
 <body>
 <div th:replace="layout.html :: header"></div>
 <h1 class="text-center" style="padding: 2%">List of services</h1>
 
-<!--<div style="margin-top: 5%">-->
-<!--    <div>-->
-<!--        <div class="container mb-4">-->
-<!--            <div class="row">-->
-<!--                <div class="col-12" >-->
-<!--                    <div class="table-responsive">-->
-
-<!--                        <a  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"-->
-<!--                                th:href="@{/services/add}" class="btn btn-primary">-->
-<!--                            Add new service-->
-<!--                        </a>-->
-
-<!--                        <a    sec:authorize="hasRole('ROLE_CLIENT')"-->
-<!--                                th:href="@{/services/rate}" class="btn btn-primary">-->
-<!--                            Rate Service-->
-<!--                        </a>-->
-<!--                        <a  th:href="@{/servicesRates}" class="btn btn-link">-->
-<!--                            List of rates-->
-<!--                        </a>-->
-<!--                        <table class="table table-hover table-striped">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>Service Name</th>-->
-<!--                                <th>Price</th>-->
-<!--                                <th>Rating</th>-->
-<!--                                <th>Employees</th>-->
-<!--                                <th></th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            <tbody>-->
-
-
-<!--                            <tr class="item" th:each="service :${services}">-->
-<!--                                <td th:text="${service.serviceName}" >[service.dejnost]</td>-->
-<!--                                <td th:text="${service.price}">[service.cena]</td>-->
-<!--                                <td th:text="${service.getAvgRating().toString()}" >[service.getAvgRating()]</td>-->
-
-<!--                                <td>-->
-
-<!--                                <div  class="item-rel"  th:each="employee:${service.employees}"-->
-<!--                                      th:value="${employee.getUsername()}"-->
-<!--                                      th:text="${employee.getName()}"-->
-<!--                                    >-->
-<!--                                    [employee.ime]-->
-<!--                                 </div>-->
-<!--                                </td>-->
-
-
-<!--                                <td>-->
-<!--                                    <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">-->
-<!--                                    <a th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}"-->
-<!--                                       class="btn btn-outline-primary">Edit</a>-->
-<!--                                    <form style="display: inline-flex" method="POST" th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">-->
-<!--                                        <button type="submit" class="btn btn-outline-primary" >Delete</button>-->
-<!--                                    </form>-->
-<!--                                </th:block>-->
-
-<!--                                    <a  sec:authorize="isAuthenticated()"-->
-<!--                                            th:href="@{'/makeAppointment'}" class="btn btn-primary">-->
-<!--                                        Make Appointment</a>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div>-->
-
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-lg-8 text-center">
             <div class="chooseus__text">
 
-                <a  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"
-                    th:href="@{/services/add}" class="btn btn-primary btn-lg">
+                <a class="btn btn-primary btn-lg"
+                   sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')" th:href="@{/services/add}">
                     Add new service
                 </a>
 
-                <a    sec:authorize="hasRole('ROLE_CLIENT')"
-                      th:href="@{/services/rate}" class="btn btn-primary btn-lg">
+                <a class="btn btn-primary btn-lg"
+                   sec:authorize="hasRole('ROLE_CLIENT')" th:href="@{/services/rate}">
                     Rate Service
                 </a>
-                <a  th:href="@{/servicesRates}" class="btn btn-primary btn-lg">
+                <a class="btn btn-primary btn-lg" th:href="@{/servicesRates}">
                     List of rates
                 </a>
             </div>
@@ -105,38 +34,39 @@
     </div>
 
 
-<br><br>
+    <br><br>
 
 
-<div th:each="service :${services}" class="card border-primary m-3"
-     style="width: 28%; display: inline-flex">
-    <div class="card-header" th:text="${service.serviceName}" ></div>
-    <div class="card-body">
-       Price: <h4  class="card-title" th:text="${service.price}" ></h4>
-        <div class="card-text">
-            <p>Employees:</p>
-            <div  class="item-rel"  th:each="employee:${service.employees}"
-                  th:value="${employee.getUsername()}"
-                  th:text="${employee.getName()}" style="display: inline">
-                [employee.ime]
+    <div class="card border-primary m-3" style="width: 28%; display: inline-flex"
+         th:each="service :${services}">
+        <div class="card-header" th:text="${service.serviceName}"></div>
+        <div class="card-body">
+            Price: <h4 class="card-title" th:text="${service.price}"></h4>
+            <div class="card-text">
+                <p>Employees:</p>
+                <div class="item-rel" style="display: inline"
+                     th:each="employee:${service.employees}"
+                     th:text="${employee.getName()}" th:value="${employee.getUsername()}">
+                    [employee.ime]
+                </div>
             </div>
         </div>
+        <div class="card-footer text-muted">
+
+            <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
+                <a class="btn btn-outline-primary"
+                   th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}">Edit</a>
+                <form method="POST" style="display: inline-flex"
+                      th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">
+                    <button class="btn btn-outline-primary" type="submit">Delete</button>
+                </form>
+            </th:block>
+
+            <a class="btn btn-primary"
+               sec:authorize="isAuthenticated()" th:href="@{'/makeAppointment'}"> Make Appointment</a>
+
+        </div>
     </div>
-    <div class="card-footer text-muted">
-
-        <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
-            <a th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}"
-               class="btn btn-outline-primary">Edit</a>
-            <form style="display: inline-flex" method="POST" th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">
-                <button type="submit" class="btn btn-outline-primary" >Delete</button>
-            </form>
-        </th:block>
-
-        <a  sec:authorize="isAuthenticated()"
-            th:href="@{'/makeAppointment'}" class="btn btn-primary"> Make Appointment</a>
-
-    </div>
-</div>
 </div>
 <div th:replace="layout.html :: footer"></div>
 

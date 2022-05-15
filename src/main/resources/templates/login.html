@@ -5,38 +5,38 @@
     <title>Log in</title>
     <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
     <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
-    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
 </head>
 <body>
 <div th:replace="layout.html ::header"></div>
 
-<form method="post" id="loginForm" action="/login" class="contact__form" name="loginForm">
-    <fieldset  style="margin: 5%; ">
+<form action="/login" class="contact__form" id="loginForm" method="post" name="loginForm">
+    <fieldset style="margin: 5%; ">
 
         <div class="container justify-content-center bg-light bg-gradient rounded" style="width: 50%; margin:auto;
         padding: 5%; box-shadow: 5px 10px 8px #888888">
             <h3 class="text-center">Log in</h3>
             <div class="form-group">
-                <label for="username"  class="sr-only form-label mt-4">Username:</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
-                       autofocus="">
+                <label class="sr-only form-label mt-4" for="username">Username:</label>
+                <input autofocus="" class="form-control" id="username" name="username" placeholder="Username" required=""
+                       type="text">
             </div>
 
             <div class="form-group">
-                <label   for="password" class=" sr-only form-label mt-4" style="font-weight: bold">Password:</label>
-                <input type="password" class="form-control" id="password" name="password"
-                       placeholder="Password" required="">
+                <label class=" sr-only form-label mt-4" for="password" style="font-weight: bold">Password:</label>
+                <input class="form-control" id="password" name="password" placeholder="Password"
+                       required="" type="password">
             </div>
             <br>
 
             <div th:if="${hasError}">
-                <div th:text="${error}" class="text-danger"></div>
+                <div class="text-danger" th:text="${error}"></div>
             </div>
 
             <div class="text-center">
-                <button type="submit" id="submit" class="btn btn-primary btn-lg">Log in</button>
-                <a href="/register" class="btn btn-link" style="display: block">Register here</a>
+                <button class="btn btn-primary btn-lg" id="submit" type="submit">Log in</button>
+                <a class="btn btn-link" href="/register" style="display: block">Register here</a>
             </div>
 
         </div>

@@ -19,8 +19,8 @@
                 <div class="col-12">
                     <div class="table-responsive">
 
-                        <a  sec:authorize="isAuthenticated()"
-                                class="btn btn-primary" th:href="@{/services/rate}">
+                        <a class="btn btn-primary"
+                           sec:authorize="isAuthenticated()" th:href="@{/services/rate}">
                             Rate Service
                         </a>
                         <table class="table table-hover table-striped">

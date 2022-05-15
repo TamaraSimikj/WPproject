@@ -22,8 +22,7 @@ public class ServicesController {
     private final UserService userService;
 
 
-
-    public ServicesController(SalonServiceService salonServiceService, UserService userService ) {
+    public ServicesController(SalonServiceService salonServiceService, UserService userService) {
         this.salonServiceService = salonServiceService;
         this.userService = userService;
 
@@ -31,7 +30,7 @@ public class ServicesController {
 
 
     @GetMapping("/services")
-    public String showServices( Model model) {
+    public String showServices(Model model) {
         List<SalonService> salonServices = this.salonServiceService.findAll();
         model.addAttribute("services", salonServices);
         return "services.html";
@@ -42,10 +41,10 @@ public class ServicesController {
     @GetMapping("/services/add")
     public String showAdd(@RequestParam(required = false) String error,
                           Model model) {
-         List<User> employees = this.userService.listEmployees();
-       // List<Employee> employees = this.employeeService.listAll();
-        model.addAttribute("employees",employees);
-        model.addAttribute("hasError",error!=null);
+        List<User> employees = this.userService.listEmployees();
+        // List<Employee> employees = this.employeeService.listAll();
+        model.addAttribute("employees", employees);
+        model.addAttribute("hasError", error != null);
         model.addAttribute("error", error);
 
         return "createService.html";
@@ -55,27 +54,25 @@ public class ServicesController {
     @GetMapping("/services/{id}/edit")
     public String showEdit(@PathVariable String id, Model model) {
         SalonService service = this.salonServiceService.findbyId(id);
-       List<User> employees = this.userService.listEmployees();
+        List<User> employees = this.userService.listEmployees();
         //List<Employee> employees = this.employeeService.listAll();
-        model.addAttribute("service",service);
-        model.addAttribute("employees",employees);
+        model.addAttribute("service", service);
+        model.addAttribute("employees", employees);
 
         return "services_form.html";
     }
 
     @PostMapping("/services")
     public String create(@RequestParam String serviceId,
-                         @RequestParam  String serviceName,
-                         @RequestParam  Integer price,
+                         @RequestParam String serviceName,
+                         @RequestParam Integer price,
                          @RequestParam List<String> employeeIds) {
 
-        try{
+        try {
             this.salonServiceService.create(serviceId, serviceName, price, employeeIds);
             return "redirect:/services";
-        }
-        catch (ServiceIdReservedException exception)
-        {
-            return "redirect:/services/add?error="+exception.getMessage();
+        } catch (ServiceIdReservedException exception) {
+            return "redirect:/services/add?error=" + exception.getMessage();
         }
 
     }

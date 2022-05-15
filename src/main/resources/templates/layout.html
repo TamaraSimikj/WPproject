@@ -6,7 +6,7 @@
     <link href="https://bootswatch.com/5/journal/bootstrap.css"
           rel="stylesheet">
     <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
-    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
 
 
@@ -16,7 +16,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">BeautyCenter</a>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="btn btn-primary"
+                    data-bs-target="#navbarColor03" data-bs-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -37,35 +38,35 @@
 
 
                     <th:block sec:authorize="isAuthenticated()">
-                        <a class="nav-link"  href="/appointments">All Appointments</a>
+                        <a class="nav-link" href="/appointments">All Appointments</a>
                         <a class="nav-link " href="/termini">Free Termini
                         </a>
                     </th:block>
 
                     <li>
-                        <a class="nav-link"  href="/about">About Us</a>
+                        <a class="nav-link" href="/about">About Us</a>
                     </li>
 
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                    <li>
-                        <a class="nav-link"  href="/registerEmployee">Add employee</a>
-                    </li>
+                        <li>
+                            <a class="nav-link" href="/registerEmployee">Add employee</a>
+                        </li>
                     </th:block>
 
                 </ul>
                 <th:block sec:authorize="!isAuthenticated()">
-                    <form class="d-flex" >
+                    <form class="d-flex">
 
-                        <a  class="btn btn-primary my-2 my-sm-0" th:href="@{/login}">Log in</a>
+                        <a class="btn btn-primary my-2 my-sm-0" th:href="@{/login}">Log in</a>
                         &nbsp;&nbsp;
-                        <a  class="btn btn-outline-primary my-2 my-sm-0" href="/register">Register</a>
+                        <a class="btn btn-outline-primary my-2 my-sm-0" href="/register">Register</a>
 
                     </form>
                 </th:block>
 
                 <th:block sec:authorize="isAuthenticated()">
                     <form class="d-flex">
-                        <a class="nav-link" href="#"  th:text="'Hello  '+${#authentication.getName()}" >
+                        <a class="nav-link" href="#" th:text="'Hello  '+${#authentication.getName()}">
 
                         </a>
 
@@ -83,7 +84,7 @@
 </div>
 
 
-<div id="bodyLayout" >
+<div id="bodyLayout">
     <style type="text/css">
         #slider {
             overflow: hidden;
@@ -146,13 +147,17 @@
         </th:block>
 
     </div>
-    <div id="slider" style="width: 90%; margin:5%; background-color: beige" >
+    <div id="slider" style="width: 90%; margin:5%; background-color: beige">
         <figure>
-            <img width="700px" height="500px" src="https://www.e-architect.com/wp-content/uploads/2021/01/beauty-salon-by-magic-kyiv-v220121-a2.jpg" />
-            <img  width="700px" height="500px"  src="https://media.istockphoto.com/photos/various-hair-dresser-tools-on-pink-background-with-copy-space-picture-id1024577404?k=20&m=1024577404&s=612x612&w=0&h=4HSEj5psaIL1_7zA-D75DPjjyiqroJbNIwk5FV4d2_4=" />
-            <img  width="700px" height="500px" src="https://abc-7.com/wp-content/uploads/2021/06/makeup-products.jpg" />
-            <img  width="700px" height="500px" src="https://studentaffairs.lmu.edu/media/studentaffairs/brc/Spa-906x511.jpg" />
-            <img  width="700px" height="500px" src="https://www.e-architect.com/wp-content/uploads/2021/01/beauty-salon-by-magic-kyiv-v220121-a2.jpg" />
+            <img height="500px" src="https://www.e-architect.com/wp-content/uploads/2021/01/beauty-salon-by-magic-kyiv-v220121-a2.jpg"
+                 width="700px"/>
+            <img height="500px" src="https://media.istockphoto.com/photos/various-hair-dresser-tools-on-pink-background-with-copy-space-picture-id1024577404?k=20&m=1024577404&s=612x612&w=0&h=4HSEj5psaIL1_7zA-D75DPjjyiqroJbNIwk5FV4d2_4="
+                 width="700px"/>
+            <img height="500px" src="https://abc-7.com/wp-content/uploads/2021/06/makeup-products.jpg" width="700px"/>
+            <img height="500px" src="https://studentaffairs.lmu.edu/media/studentaffairs/brc/Spa-906x511.jpg"
+                 width="700px"/>
+            <img height="500px" src="https://www.e-architect.com/wp-content/uploads/2021/01/beauty-salon-by-magic-kyiv-v220121-a2.jpg"
+                 width="700px"/>
         </figure>
 
     </div>
@@ -189,12 +194,11 @@
 
 
     </div>
-    <div class="map" style="margin-left: 5%;" >
-        <iframe style="width: 95%; height: 400px;" class="justify-content-center"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1048.3541231470856!2d21.43168421844593!3d41.99612823689114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135415b475092443%3A0x2420e649a4b27994!2zU3F1YXJlIOKAnk1hY2Vkb25pYeKAnQ!5e0!3m2!1sen!2smk!4v1613774637828!5m2!1sen!2smk"></iframe>
+    <div class="map" style="margin-left: 5%;">
+        <iframe class="justify-content-center" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1048.3541231470856!2d21.43168421844593!3d41.99612823689114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135415b475092443%3A0x2420e649a4b27994!2zU3F1YXJlIOKAnk1hY2Vkb25pYeKAnQ!5e0!3m2!1sen!2smk!4v1613774637828!5m2!1sen!2smk"
+                style="width: 95%; height: 400px;"></iframe>
     </div>
 </div>
-
 
 
 <div th:fragment="footer">
@@ -204,7 +208,8 @@
             <div class="social"><a href="#"><i class="icon ion-social-instagram">
 
             </i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#">
-                <i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a>
+            </div>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="/home">Home</a></li>
                 <li class="list-inline-item"><a href="/services">Services</a></li>

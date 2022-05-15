@@ -1,16 +1,16 @@
 package com.wp.project.beautysalon;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.lowagie.text.Font;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import com.wp.project.beautysalon.model.Appointment;
 
 import javax.servlet.http.HttpServletResponse;
-
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.*;
-import com.wp.project.beautysalon.model.Appointment;
-import com.wp.project.beautysalon.model.User;
+import java.awt.*;
+import java.io.IOException;
+import java.util.stream.Collectors;
 
 
 public class AppPDFExporter {
@@ -50,11 +50,11 @@ public class AppPDFExporter {
 
     private void writeTableData(PdfPTable table) {
 
-            table.addCell(String.valueOf(appointment.getAppointmentId()));
-            table.addCell(String.valueOf(appointment.getTermin().getStartTime()));
-            table.addCell(appointment.getTotalPrice().toString());
-            table.addCell(appointment.getSalonServices().stream().map(a->a.getServiceName()).collect(Collectors.toList()).toString());
-            table.addCell(appointment.getClient().getName());
+        table.addCell(String.valueOf(appointment.getAppointmentId()));
+        table.addCell(String.valueOf(appointment.getTermin().getStartTime()));
+        table.addCell(appointment.getTotalPrice().toString());
+        table.addCell(appointment.getSalonServices().stream().map(a -> a.getServiceName()).collect(Collectors.toList()).toString());
+        table.addCell(appointment.getClient().getName());
 
     }
 
@@ -74,7 +74,7 @@ public class AppPDFExporter {
 
         PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 1.8f, 3.0f, 3.0f, 3.5f});
+        table.setWidths(new float[]{1.5f, 1.8f, 3.0f, 3.0f, 3.5f});
         table.setSpacingBefore(10);
 
         writeTableHeader(table);

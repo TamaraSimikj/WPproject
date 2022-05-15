@@ -5,7 +5,6 @@ import com.wp.project.beautysalon.AppPDFExporter;
 import com.wp.project.beautysalon.model.Appointment;
 import com.wp.project.beautysalon.model.SalonService;
 import com.wp.project.beautysalon.model.Termin;
-import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.service.AppointmentService;
 import com.wp.project.beautysalon.service.SalonServiceService;
 import com.wp.project.beautysalon.service.TerminiService;
@@ -54,7 +53,7 @@ public class AppointmentController {
         return "appointmentsList.html";
     }
 
-    @GetMapping( "/makeAppointment")
+    @GetMapping("/makeAppointment")
     @PreAuthorize("isAuthenticated()")
     public String MakeAppointment(Model model) {
 
@@ -67,16 +66,17 @@ public class AppointmentController {
 
         return "appointment-form.html";
     }
+
     @PostMapping("/makeAppointment")
     public String create(@RequestParam List<String> serviceIds,
                          @RequestParam String clientName,
-                         @RequestParam  Integer terminId
+                         @RequestParam Integer terminId
                          // @RequestParam(required = false) Integer uplataId
     ) {
         List<SalonService> services = this.salonService.findAllById(serviceIds);
-   //     User client = this.userService.findById(clientName);
+        //     User client = this.userService.findById(clientName);
 
-       Appointment appointment = this.appointmentService.create(clientName,terminId,services);
+        Appointment appointment = this.appointmentService.create(clientName, terminId, services);
 
         return "redirect:/appointments";
     }
@@ -88,8 +88,8 @@ public class AppointmentController {
         List<Termin> termini = this.terminiService.listAllNotReserved();
         List<SalonService> services = this.salonService.findAll();
 
-        model.addAttribute("appointment",appointment);
-        model.addAttribute("termini",termini);
+        model.addAttribute("appointment", appointment);
+        model.addAttribute("termini", termini);
         model.addAttribute("services", services);
 
         return "editAppointment.html";
@@ -99,10 +99,10 @@ public class AppointmentController {
     public String update(@PathVariable Integer id,
                          @RequestParam List<String> serviceIds,
                          @RequestParam String clientName,
-                         @RequestParam  Integer terminId) {
+                         @RequestParam Integer terminId) {
 
         List<SalonService> services = this.salonService.findAllById(serviceIds);
-        this.appointmentService.update(id,clientName,terminId,services);
+        this.appointmentService.update(id, clientName, terminId, services);
 
         return "redirect:/appointments";
     }

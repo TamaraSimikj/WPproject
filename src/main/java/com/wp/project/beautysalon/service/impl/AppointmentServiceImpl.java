@@ -11,7 +11,6 @@ import com.wp.project.beautysalon.repository.AppointmentRepository;
 import com.wp.project.beautysalon.repository.TerminRepository;
 import com.wp.project.beautysalon.repository.UserRepository;
 import com.wp.project.beautysalon.service.AppointmentService;
-import com.wp.project.beautysalon.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -48,7 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         User client = this.userRepository.findById(clientId).orElseThrow(InvalidUsernameException::new);
         Termin termin = this.terminRepository.findById(terminId).orElseThrow(InvalidTerminIdException::new);
 
-        Appointment appointment = new Appointment(client,termin,services);
+        Appointment appointment = new Appointment(client, termin, services);
         this.appointmentRepository.save(appointment);
 
         termin.setAppointment(appointment);

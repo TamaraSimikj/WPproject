@@ -6,7 +6,7 @@
 
     <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
     <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
-    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -17,7 +17,7 @@
     <div>
         <div class="container mb-4">
             <div class="row">
-                <div class="col-12" >
+                <div class="col-12">
                     <div class="table-responsive">
                         <table class="table table-hover table-striped">
                             <thead>
@@ -31,42 +31,52 @@
                             </thead>
                             <tbody>
 
-                            <tr th:if="${#authentication.getName().equals(app.client.getUsername())} "
-                                class="item" th:each="app :${appointments}">
+                            <tr class="item"
+                                th:each="app :${appointments}" th:if="${#authentication.getName().equals(app.client.getUsername())} ">
 
                                 <td th:text="${app.appointmentId}">[app.id]</td>
-                                <td th:text="${app.client.getName()} + ' id:' +${app.client.getUsername()} " >[app.user.id]</td>
-                                <td th:text="${app.termin.getStartTime()}" >[app.termins.pocetok]</td>
-                                <td th:text="${app.payment}!=null ? ${app.payment.getPaymentId()} :'notPayed'">[app.payment.getId()]</td>
+                                <td th:text="${app.client.getName()} + ' id:' +${app.client.getUsername()} ">
+                                    [app.user.id]
+                                </td>
+                                <td th:text="${app.termin.getStartTime()}">[app.termins.pocetok]</td>
+                                <td th:text="${app.payment}!=null ? ${app.payment.getPaymentId()} :'notPayed'">
+                                    [app.payment.getId()]
+                                </td>
 
 
-                                    <td>
-                                        <div class="item-rel" th:each="service : ${app.salonServices}"
-                                             th:text="${service.getServiceName()}">
+                                <td>
+                                    <div class="item-rel" th:each="service : ${app.salonServices}"
+                                         th:text="${service.getServiceName()}">
 
-                                        </div>
-                                    </td>
+                                    </div>
+                                </td>
 
-                                <td >
-                                    <form method="POST" th:action="@{'/appointments/{id}/delete' (id = ${app.appointmentId})}">
-                                        <button type="submit" class="btn btn-primary btn-sm">Delete</button>
+                                <td>
+                                    <form method="POST"
+                                          th:action="@{'/appointments/{id}/delete' (id = ${app.appointmentId})}">
+                                        <button class="btn btn-primary btn-sm" type="submit">Delete</button>
                                     </form>
 
-                                    <a th:href="@{'/appointments/{id}/edit' (id = ${app.appointmentId})}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a class="btn btn-primary btn-sm"
+                                       th:href="@{'/appointments/{id}/edit' (id = ${app.appointmentId})}">Edit</a>
 
-                                    <a th:href="@{'/appointments/{id}/exportpdf' (id = ${app.appointmentId})}"
-                                       class="btn btn-secondary">Export to PDF</a>
+                                    <a class="btn btn-secondary"
+                                       th:href="@{'/appointments/{id}/exportpdf' (id = ${app.appointmentId})}">Export to PDF</a>
                                 </td>
 
                             </tr>
 
 
-                            <tr sec:authorize="!hasRole('ROLE_CLIENT')"
-                                class="item" th:each="app :${appointments}">
+                            <tr class="item"
+                                sec:authorize="!hasRole('ROLE_CLIENT')" th:each="app :${appointments}">
                                 <td th:text="${app.appointmentId}">[app.id]</td>
-                                <td th:text="${app.client.getName()} + ' id:' +${app.client.getUsername()} " >[app.user.id]</td>
-                                <td th:text="${app.termin.getStartTime()}" >[app.termins.pocetok]</td>
-                                <td th:text="${app.payment}!=null ? ${app.payment.getPaymentId()} :'notPayed'">[app.payment.getId()]</td>
+                                <td th:text="${app.client.getName()} + ' id:' +${app.client.getUsername()} ">
+                                    [app.user.id]
+                                </td>
+                                <td th:text="${app.termin.getStartTime()}">[app.termins.pocetok]</td>
+                                <td th:text="${app.payment}!=null ? ${app.payment.getPaymentId()} :'notPayed'">
+                                    [app.payment.getId()]
+                                </td>
 
 
                                 <td>
@@ -78,8 +88,9 @@
 
                                 <td>
 
-                                    <form method="POST" th:action="@{'/appointments/{id}/delete' (id = ${app.appointmentId})}">
-                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                    <form method="POST"
+                                          th:action="@{'/appointments/{id}/delete' (id = ${app.appointmentId})}">
+                                        <button class="btn btn-primary" type="submit">Delete</button>
                                     </form>
 
 
@@ -94,6 +105,6 @@
         </div>
     </div>
 
-<div th:replace="layout.html ::footer"></div>
+    <div th:replace="layout.html ::footer"></div>
 </body>
 </html>

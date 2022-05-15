@@ -5,64 +5,66 @@
     <title>Add new date</title>
     <link href="https://bootswatch.com/5/journal/bootstrap.css" rel="stylesheet">
     <script src="https://bootswatch.com/_assets/css/custom.min.css"></script>
-    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css" ></script>
+    <script src="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css"></script>
     <script src="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+    <script>
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
-    var yyyy = today.getFullYear();
-    if(dd<10){
-        dd='0'+dd
-    }
-    if(mm<10){
-        mm='0'+mm
-    }
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
 
-    today = yyyy+'-'+mm+'-'+dd;
-    document.getElementById("startTime").setAttribute("min", today);
-</script>
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("startTime").setAttribute("min", today);
+    </script>
 </head>
 <body>
 <div th:replace="layout.html :: header"></div>
 
-<form method="POST"  th:action="@{'/termini/{id}' (id = ${termin?.terminId})}">
+<form method="POST" th:action="@{'/termini/{id}' (id = ${termin?.terminId})}">
     <fieldset>
         <div class="container" width:50%>
             <br>
             <br>
             <h3>Create new termin</h3>
 
-         <div class="form-group">
-                <label  class="form-label mt-4"for="startTime" >start Time:</label>
-                <input id="startTime" name="startTime" type="datetime-local"
+            <div class="form-group">
+                <label class="form-label mt-4" for="startTime">start Time:</label>
+                <input class="form-control" id="startTime" min="2017-06-01T08:30"
 
-                       th:value="${termin?.startTime}"
-                       class="form-control"
-                       min="2017-06-01T08:30"
+                       name="startTime"
                        placeholder="yyyy-MM-ddThh:mm:00Z"
-                       required> <!-- da se zimaat samo od denesniot datum-->
+                       required
+                       th:value="${termin?.startTime}"
+                       type="datetime-local"> <!-- da se zimaat samo od denesniot datum-->
             </div>
 
 
             <div class="form-group">
-                <label  class="form-label mt-4"for="duration" >Duration in hours:</label>
-                <input id="duration" name="duration" type="number"
+                <label class="form-label mt-4" for="duration">Duration in hours:</label>
+                <input class="form-control" id="duration" name="duration"
                        th:value="${termin?.duration}"
-                       class="form-control" >
+                       type="number">
             </div>
-            <label for="employeeId" class="form-label mt-4">Employee:</label><br/>
-            <input id="employeeId" name="employeeId"
-                   type="text"
-                   th:value="${#authentication.getName()}"
-                   class="form-control" readonly>
+            <label class="form-label mt-4" for="employeeId">Employee:</label><br/>
+            <input class="form-control" id="employeeId"
+                   name="employeeId"
+                   readonly
+                   th:value="${#authentication.getName()}" type="text">
 
 
             <br>
-            <div><button type="submit" class="btn btn-primary">Submit</button></div>
-            <a id="back" href="/termini" type="button" class="btn btn-link">Back to termini</a>
+            <div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+            <a class="btn btn-link" href="/termini" id="back" type="button">Back to termini</a>
         </div>
         </div>
     </fieldset>

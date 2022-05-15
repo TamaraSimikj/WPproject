@@ -1,6 +1,5 @@
 package com.wp.project.beautysalon.service.impl;
 
-import com.wp.project.beautysalon.model.Appointment;
 import com.wp.project.beautysalon.model.Termin;
 import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.model.exceptions.InvalidArgumentException;
@@ -12,7 +11,6 @@ import com.wp.project.beautysalon.service.TerminiService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,7 +45,7 @@ public class TerminiServiceImpl implements TerminiService {
 
 
     @Override
-    public Termin update(Integer id, LocalDateTime startTime,  Integer duration, String employeeId) {
+    public Termin update(Integer id, LocalDateTime startTime, Integer duration, String employeeId) {
 
         Termin termin = this.terminRepository.findById(id).orElseThrow(InvalidTerminIdException::new);
         User employee = this.userRepository.getById(employeeId);
@@ -60,10 +58,11 @@ public class TerminiServiceImpl implements TerminiService {
 
     @Override
     public Termin delete(Integer id) {
-        Termin termin  = this.findbyId(id);
+        Termin termin = this.findbyId(id);
         this.terminRepository.delete(termin);
         return termin;
     }
+
     @Override
     public List<Termin> listAllNotReserved() {
 

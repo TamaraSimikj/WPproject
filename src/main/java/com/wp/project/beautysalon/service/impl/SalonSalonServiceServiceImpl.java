@@ -1,15 +1,15 @@
 package com.wp.project.beautysalon.service.impl;
+
 import com.wp.project.beautysalon.model.Rate;
+import com.wp.project.beautysalon.model.SalonService;
 import com.wp.project.beautysalon.model.User;
 import com.wp.project.beautysalon.model.exceptions.InvalidSalonServiceIdException;
 import com.wp.project.beautysalon.model.exceptions.ServiceIdReservedException;
 import com.wp.project.beautysalon.repository.RateRepository;
 import com.wp.project.beautysalon.repository.ServiceRepository;
 import com.wp.project.beautysalon.repository.UserRepository;
-import org.springframework.stereotype.Service;
 import com.wp.project.beautysalon.service.SalonServiceService;
-
-import com.wp.project.beautysalon.model.SalonService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -52,10 +52,9 @@ public class SalonSalonServiceServiceImpl implements SalonServiceService {
         try {
             SalonService postoeckaUsluga = this.findbyId(id);
             throw new ServiceIdReservedException("This id is reserved,try with another!");
-        }
-        catch (InvalidSalonServiceIdException ex){
+        } catch (InvalidSalonServiceIdException ex) {
             List<User> employees = this.userRepository.findAllById(employeeIds);
-            SalonService salonService = new SalonService(id,serviceName,price,employees);
+            SalonService salonService = new SalonService(id, serviceName, price, employees);
             return this.serviceRepository.save(salonService);
         }
     }
@@ -72,29 +71,6 @@ public class SalonSalonServiceServiceImpl implements SalonServiceService {
         return this.serviceRepository.save(salonService);
     }
 
-//    @Override
-//    public SalonService create(String id, String serviceName, Integer price, List<Long> employeeIds) {
-//        try {
-//            SalonService postoeckaUsluga = this.findbyId(id);
-//            throw new ServiceIdReservedException("This id is reserved,try with another!");
-//        }
-//        catch (InvalidSalonServiceIdException ex){
-//            List<User> employees = this.userRepository.f.findAllById(employeeIds);
-//            SalonService salonService = new SalonService(id,serviceName,price,employees);
-//            return this.serviceRepository.save(salonService);
-//        }
-//    }
-
-//    @Override
-//    public SalonService update(String id, String serviceName, Integer price, List<Long> employeeIds) {
-//        SalonService salonService = this.findbyId(id);
-//        salonService.setServiceName(serviceName);
-//        salonService.setPrice(price);
-//    //    List<Employee> employees = this.employeeRepository.findAllById(employeeIds);
-//       // salonService.setEmployees(employees);
-//        return this.serviceRepository.save(salonService);
-//    }
-
     @Override
     public SalonService delete(String id) {
         SalonService salonService = this.findbyId(id);
@@ -104,7 +80,7 @@ public class SalonSalonServiceServiceImpl implements SalonServiceService {
 
     @Override
     public void rate(SalonService salonService, Integer value, String comment, User client) {
-        Rate rate = new Rate(salonService,value,comment,client);
+        Rate rate = new Rate(salonService, value, comment, client);
         this.rateRepository.save(rate);
     }
 }
