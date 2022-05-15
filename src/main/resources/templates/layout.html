@@ -31,29 +31,26 @@
                         <a class="nav-link" href="/services">Services</a>
                     </li>
 
-                    <th:block sec:authorize="hasRole('ROLE_EMPLOYEE')">
-                        <a class="nav-link" href="/appointmentList">All appointments</a>
-                    </th:block>
-
                     <th:block sec:authorize="hasRole('ROLE_CLIENT')">
                         <a class="nav-link" href="/makeAppointment">Make an appointment</a>
                     </th:block>
 
 
-                    <th:block sec:authorize="hasRole('ROLE_EMPLOYEE')">
-                        <a href="/appointment" class="btn btn-primary btn-lg justify-content-center">Appointments</a>
-                    </th:block>
-
                     <th:block sec:authorize="isAuthenticated()">
-                        <a class="nav-link"  href="/appointments">Booked Appointments</a>
+                        <a class="nav-link"  href="/appointments">All Appointments</a>
                         <a class="nav-link " href="/termini">Free Termini
-
                         </a>
                     </th:block>
 
                     <li>
                         <a class="nav-link"  href="/about">About Us</a>
                     </li>
+
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li>
+                        <a class="nav-link"  href="/registerEmployee">Add employee</a>
+                    </li>
+                    </th:block>
 
                 </ul>
                 <th:block sec:authorize="!isAuthenticated()">
@@ -213,7 +210,6 @@
                 <li class="list-inline-item"><a href="/services">Services</a></li>
                 <li class="list-inline-item"><a href="/makeAppointment">Make Appointment</a></li>
                 <li class="list-inline-item"><a href="services/rate">Rate</a></li>
-                <li class="list-inline-item"><a href="#">Locations</a></li>
             </ul>
             <p class="copyright">BeautyCenter © 2022</p>
         </footer>

@@ -1,5 +1,6 @@
 package com.wp.project.beautysalon.model;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer appointmentId;
 
+    @NotNull
     private Integer totalPrice;
 
     @OneToOne
@@ -34,6 +36,8 @@ public class Appointment {
         this.termin = termin;
         this.client = client;
         this.salonServices = salonServices;
+        this.totalPrice = salonServices.stream().map(x -> x.getPrice())
+                .reduce(0, Integer::sum);
     }
 
     public Termin getTermin() {

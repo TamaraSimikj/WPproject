@@ -4,6 +4,7 @@ import com.wp.project.beautysalon.model.Appointment;
 import com.wp.project.beautysalon.model.SalonService;
 import com.wp.project.beautysalon.model.Termin;
 import com.wp.project.beautysalon.model.User;
+import com.wp.project.beautysalon.model.exceptions.InvalidAppointmentId;
 import com.wp.project.beautysalon.model.exceptions.InvalidTerminIdException;
 import com.wp.project.beautysalon.model.exceptions.InvalidUsernameException;
 import com.wp.project.beautysalon.repository.AppointmentRepository;
@@ -37,7 +38,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment findbyId(Integer Id) {
-        return this.findbyId(Id);
+
+        return this.appointmentRepository.findById(Id).orElseThrow(InvalidAppointmentId::new);
     }
 
     @Override
@@ -73,6 +75,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         termin.setAppointment(null);
         this.terminRepository.save(termin);
         this.appointmentRepository.delete(appointment);
+
         return appointment;
     }
 }

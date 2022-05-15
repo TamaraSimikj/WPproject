@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Available appointments</title>
@@ -24,29 +24,64 @@
                             <tr>
                                 <th>No. of reservation</th>
                                 <th>Client</th>
-                                <th>Time</th> <!-- dali da se stavi i id na termin-->
+                                <th>Time</th>
                                 <th>Payment</th>
                                 <th>Service</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <tr class="item" th:each="app :${appointments}">
+                            <tr th:if="${#authentication.getName().equals(app.client.getUsername())} "
+                                class="item" th:each="app :${appointments}">
+
                                 <td th:text="${app.appointmentId}">[app.id]</td>
                                 <td th:text="${app.client.getName()} + ' id:' +${app.client.getUsername()} " >[app.user.id]</td>
                                 <td th:text="${app.termin.getStartTime()}" >[app.termins.pocetok]</td>
                                 <td th:text="${app.payment}!=null ? ${app.payment.getPaymentId()} :'notPayed'">[app.payment.getId()]</td>
 
-                                <th:block  th:each="service : ${app.salonServices}" >
-                                    <td th:text="${service.getServiceName()}" ></td>
-                                </th:block>
+
+                                    <td>
+                                        <div class="item-rel" th:each="service : ${app.salonServices}"
+                                             th:text="${service.getServiceName()}">
+
+                                        </div>
+                                    </td>
+
+                                <td >
+                                    <form method="POST" th:action="@{'/appointments/{id}/delete' (id = ${app.appointmentId})}">
+                                        <button type="submit" class="btn btn-primary btn-sm">Delete</button>
+                                    </form>
+
+                                    <a th:href="@{'/appointments/{id}/edit' (id = ${app.appointmentId})}" class="btn btn-primary btn-sm">Edit</a>
+
+                                    <a th:href="@{'/appointments/{id}/exportpdf' (id = ${app.appointmentId})}"
+                                       class="btn btn-secondary">Export to PDF</a>
+                                </td>
+
+                            </tr>
+
+
+                            <tr sec:authorize="!hasRole('ROLE_CLIENT')"
+                                class="item" th:each="app :${appointments}">
+                                <td th:text="${app.appointmentId}">[app.id]</td>
+                                <td th:text="${app.client.getName()} + ' id:' +${app.client.getUsername()} " >[app.user.id]</td>
+                                <td th:text="${app.termin.getStartTime()}" >[app.termins.pocetok]</td>
+                                <td th:text="${app.payment}!=null ? ${app.payment.getPaymentId()} :'notPayed'">[app.payment.getId()]</td>
+
+
+                                <td>
+                                    <div class="item-rel" th:each="service : ${app.salonServices}"
+                                         th:text="${service.getServiceName()}">
+
+                                    </div>
+                                </td>
+
                                 <td>
 
-                                    <form method="POST" th:action="@{'/appointment/{id}/delete' (id = ${app.appointmentId})}">
+                                    <form method="POST" th:action="@{'/appointments/{id}/delete' (id = ${app.appointmentId})}">
                                         <button type="submit" class="btn btn-primary">Delete</button>
                                     </form>
 
-                                    <a th:href="@{'/appointment/{id}/edit' (id = ${app.appointmentId})}" class="btn btn-primary">Edit</a>
 
                                 </td>
                             </tr>

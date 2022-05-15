@@ -3,20 +3,25 @@ package com.wp.project.beautysalon;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
+import com.wp.project.beautysalon.model.Appointment;
 import com.wp.project.beautysalon.model.User;
 
 
-public class UserPDFExporter {
-    private List<User> listUsers;
+public class AppPDFExporter {
 
-    public UserPDFExporter(List<User> listUsers) {
-        this.listUsers = listUsers;
+
+    private Appointment appointment;
+
+    public AppPDFExporter(Appointment appointment) {
+        this.appointment = appointment;
     }
+
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
@@ -26,32 +31,31 @@ public class UserPDFExporter {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.DARK_GRAY);
 
-
-        cell.setPhrase(new Phrase("Name", font));
+        cell.setPhrase(new Phrase("Appointment ID", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Surname", font));
+        cell.setPhrase(new Phrase("Time", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("E-mail", font));
+        cell.setPhrase(new Phrase("Price", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Phone", font));
+        cell.setPhrase(new Phrase("Services", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Appointment", font));
+        cell.setPhrase(new Phrase("Client", font));
         table.addCell(cell);
 
     }
 
     private void writeTableData(PdfPTable table) {
-        for (User user : listUsers) {
-            table.addCell(String.valueOf(user.getName()));
-            table.addCell(String.valueOf(user.getSurname()));
-            table.addCell(user.getEmail());
-            table.addCell(user.getPhoneNumber());
-            table.addCell(user.getAppointments().toString());
-        }
+
+            table.addCell(String.valueOf(appointment.getAppointmentId()));
+            table.addCell(String.valueOf(appointment.getTermin().getStartTime()));
+            table.addCell(appointment.getTotalPrice().toString());
+            table.addCell(appointment.getSalonServices().stream().map(a->a.getServiceName()).collect(Collectors.toList()).toString());
+            table.addCell(appointment.getClient().getName());
+
     }
 
     public void export(HttpServletResponse response) throws DocumentException, IOException {

@@ -103,215 +103,42 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <br><br>
-<section class="about spad">
-<div class="container">
-    <div class="row text-justify">
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="services__item" style="border: 1px solid indianred; padding: 10px">
 
-                <div th:each="service :${services}" >
-                    <p style="display: inline">Service Name:</p>
-                        <p th:text="${service.serviceName}" style="font-weight: bold; display: inline-block"> [service.dejnost]</p>
 
-                    <div>
-                        <p style="display: inline">Price:</p>
-                        <p th:text="${service.price}" style="display: inline">[service.cena]</p>
-                    <br>
-                    </div>
-
-                    <div>
-                    <p style="display: inline">Rating:</p>
-                    <p th:text="${service.getAvgRating().toString()}" style="display: inline">[service.getAvgRating()]</p>
-
-                    </div>
-
-                    <div>
-                    <p style="display: inline">Employees:</p>
-                    <div  class="item-rel"  th:each="employee:${service.employees}"
-                          th:value="${employee.getUsername()}"
-                          th:text="${employee.getName()}" style="display: inline">
-                        [employee.ime]
-                    </div>
-
-                    </div>
-
-                </div>
-        </div>
-            <br>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 container">
-            <div class="services__item" style="border: 1px solid indianred; padding: 10px">
-
-                <div th:each="service :${services}" >
-                    <p style="display: inline">Service Name:</p>
-                    <p th:text="${service.serviceName}" style="font-weight: bold; display: inline-block"> [service.dejnost]</p>
-
-                    <div>
-                        <p style="display: inline">Price:</p>
-                        <p th:text="${service.price}" style="display: inline">[service.cena]</p>
-                        <br>
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Rating:</p>
-                        <p th:text="${service.getAvgRating().toString()}" style="display: inline">[service.getAvgRating()]</p>
-
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Employees:</p>
-                        <div  class="item-rel"  th:each="employee:${service.employees}"
-                              th:value="${employee.getUsername()}"
-                              th:text="${employee.getName()}" style="display: inline">
-                            [employee.ime]
-                        </div>
-
-                    </div>
-
-                </div>
+<div th:each="service :${services}" class="card border-primary m-3"
+     style="width: 28%; display: inline-flex">
+    <div class="card-header" th:text="${service.serviceName}" ></div>
+    <div class="card-body">
+       Price: <h4  class="card-title" th:text="${service.price}" ></h4>
+        <div class="card-text">
+            <p>Employees:</p>
+            <div  class="item-rel"  th:each="employee:${service.employees}"
+                  th:value="${employee.getUsername()}"
+                  th:text="${employee.getName()}" style="display: inline">
+                [employee.ime]
             </div>
-            <br>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="services__item" style="border: 1px solid indianred; padding: 10px">
-
-                <div th:each="service :${services}" >
-                    <p style="display: inline">Service Name:</p>
-                    <p th:text="${service.serviceName}" style="font-weight: bold; display: inline-block"> [service.dejnost]</p>
-
-                    <div>
-                        <p style="display: inline">Price:</p>
-                        <p th:text="${service.price}" style="display: inline">[service.cena]</p>
-                        <br>
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Rating:</p>
-                        <p th:text="${service.getAvgRating().toString()}" style="display: inline">[service.getAvgRating()]</p>
-
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Employees:</p>
-                        <div  class="item-rel"  th:each="employee:${service.employees}"
-                              th:value="${employee.getUsername()}"
-                              th:text="${employee.getName()}" style="display: inline">
-                            [employee.ime]
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <br>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="services__item" style="border: 1px solid indianred; padding: 10px">
-
-                <div th:each="service :${services}" >
-                    <p style="display: inline">Service Name:</p>
-                    <p th:text="${service.serviceName}" style="font-weight: bold; display: inline-block"> [service.dejnost]</p>
-
-                    <div>
-                        <p style="display: inline">Price:</p>
-                        <p th:text="${service.price}" style="display: inline">[service.cena]</p>
-                        <br>
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Rating:</p>
-                        <p th:text="${service.getAvgRating().toString()}" style="display: inline">[service.getAvgRating()]</p>
-
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Employees:</p>
-                        <div  class="item-rel"  th:each="employee:${service.employees}"
-                              th:value="${employee.getUsername()}"
-                              th:text="${employee.getName()}" style="display: inline">
-                            [employee.ime]
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <br>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="services__item" style="border: 1px solid indianred; padding: 10px">
-
-                <div th:each="service :${services}" >
-                    <p style="display: inline">Service Name:</p>
-                    <p th:text="${service.serviceName}" style="font-weight: bold; display: inline-block"> [service.dejnost]</p>
-
-                    <div>
-                        <p style="display: inline">Price:</p>
-                        <p th:text="${service.price}" style="display: inline">[service.cena]</p>
-                        <br>
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Rating:</p>
-                        <p th:text="${service.getAvgRating().toString()}" style="display: inline">[service.getAvgRating()]</p>
-
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Employees:</p>
-                        <div  class="item-rel"  th:each="employee:${service.employees}"
-                              th:value="${employee.getUsername()}"
-                              th:text="${employee.getName()}" style="display: inline">
-                            [employee.ime]
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <br>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="services__item" style="border: 1px solid indianred; padding: 10px">
-
-                <div th:each="service :${services}" >
-                    <p style="display: inline">Service Name:</p>
-                    <p th:text="${service.serviceName}" style="font-weight: bold; display: inline-block"> [service.dejnost]</p>
-
-                    <div>
-                        <p style="display: inline">Price:</p>
-                        <p th:text="${service.price}" style="display: inline">[service.cena]</p>
-                        <br>
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Rating:</p>
-                        <p th:text="${service.getAvgRating().toString()}" style="display: inline">[service.getAvgRating()]</p>
-
-                    </div>
-
-                    <div>
-                        <p style="display: inline">Employees:</p>
-                        <div  class="item-rel"  th:each="employee:${service.employees}"
-                              th:value="${employee.getUsername()}"
-                              th:text="${employee.getName()}" style="display: inline">
-                            [employee.ime]
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <br>
         </div>
     </div>
-</div>
-</section>
+    <div class="card-footer text-muted">
 
-    <div th:replace="layout.html :: footer"></div>
+        <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
+            <a th:href="@{'/services/{id}/edit' (id = ${service.serviceId})}"
+               class="btn btn-outline-primary">Edit</a>
+            <form style="display: inline-flex" method="POST" th:action="@{'/services/{id}/delete' (id = ${service.serviceId})}">
+                <button type="submit" class="btn btn-outline-primary" >Delete</button>
+            </form>
+        </th:block>
+
+        <a  sec:authorize="isAuthenticated()"
+            th:href="@{'/makeAppointment'}" class="btn btn-primary"> Make Appointment</a>
+
+    </div>
+</div>
+</div>
+<div th:replace="layout.html :: footer"></div>
 
 </body>
 </html>

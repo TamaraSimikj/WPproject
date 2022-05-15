@@ -47,7 +47,7 @@ public class SalonService {
 //
 //       return sum/this.serviceRates.size();
 
-//TODO: ne printa avg
+
 
     }
 }
